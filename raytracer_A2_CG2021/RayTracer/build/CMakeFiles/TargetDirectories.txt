@@ -1,0 +1,5 @@
+/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/rebuild_cache.dir
+/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/jsonexample.dir
+/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/edit_cache.dir
+/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/vectorexample.dir
+/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/raytracer.dir

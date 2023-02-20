@@ -16,7 +16,7 @@ namespace rt{
 	//
 	// ThinLens constructor (example)
 	//
-	ThinLens::ThinLens(int width, int height, int fov):Camera(width, height, fov){
+	ThinLens::ThinLens(int width, int height, int fov,Vec3f position, Vec3f lookat, Vec3f up):Camera(width, height, fov, position, lookat,up){
 
 		//to fill
 
