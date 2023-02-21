@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "rapidjson/document.h"
-
+#include "math/geometry.h"
 #include "core/LightSource.h"
 #include "core/Shape.h"
 
@@ -24,6 +24,8 @@ public:
 	Scene(){};
 
 	void createScene(Value& scenespecs);
+
+	Vec3f backgroundColor{};
 
 
 private:

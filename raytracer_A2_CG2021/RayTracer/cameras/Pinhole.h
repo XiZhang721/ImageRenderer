@@ -25,6 +25,7 @@ public:
 	//
 	~Pinhole(){};
 
+	
 	//
 	// print function (implementing abstract function of base class)
 	//

@@ -197,7 +197,6 @@ CMakeFiles/raytracer.dir/lights/AreaLight.cpp.o: ../lights/AreaLight.cpp
 CMakeFiles/raytracer.dir/lights/AreaLight.cpp.o: ../lights/AreaLight.h
 
 CMakeFiles/raytracer.dir/lights/PointLight.cpp.o: ../core/LightSource.h
-CMakeFiles/raytracer.dir/lights/PointLight.cpp.o: ../lights/PointLight.h
 CMakeFiles/raytracer.dir/lights/PointLight.cpp.o: ../math/geometry.h
 CMakeFiles/raytracer.dir/lights/PointLight.cpp.o: ../parsers/rapidjson/allocators.h
 CMakeFiles/raytracer.dir/lights/PointLight.cpp.o: ../parsers/rapidjson/document.h

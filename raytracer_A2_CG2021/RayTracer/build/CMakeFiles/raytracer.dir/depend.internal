@@ -198,7 +198,6 @@ CMakeFiles/raytracer.dir/lights/AreaLight.cpp.o
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/lights/AreaLight.h
 CMakeFiles/raytracer.dir/lights/PointLight.cpp.o
  ../core/LightSource.h
- ../lights/PointLight.h
  ../math/geometry.h
  ../parsers/rapidjson/allocators.h
  ../parsers/rapidjson/document.h

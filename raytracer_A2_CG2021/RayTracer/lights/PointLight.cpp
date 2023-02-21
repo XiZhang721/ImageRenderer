@@ -4,7 +4,7 @@
  *
  */
 #include "PointLight.h"
-#include "lights/PointLight.h"
+
 
 
 
