@@ -3,6 +3,8 @@
  *
  */
 #include "Scene.h"
+#include "RayHitStructs.h"
+#include "shapes/Sphere.h"
 
 
 
@@ -28,13 +30,31 @@ void Scene::createScene(Value& scenespecs){
 			lightSources.push_back(LightSource::createLightSource((Value&) lightsFromJson[i]));
 		}
 	}
-	// if(scenespecs.HasMember("shapes")){
-	// 	const Value& shapesFromJson = scenespecs["shapes"];
-	// 	for (int i = 0; i < shapesFromJson.Size(); i++){
-	// 		shapes.push_back(Shape::createShape)
-	// 	}
-	// }
+	if(scenespecs.HasMember("shapes")){
+		const Value& shapesFromJson = scenespecs["shapes"];
+		for (int i = 0; i < shapesFromJson.Size(); i++){
+			shapes.push_back(Shape::createShape((Value&) shapesFromJson[i]));
+		}
+	}
 
+}
+
+Hit Scene::intersect(Ray ray){
+	Hit hit;
+	hit.hasHit = false;
+	double rayDistance = INFINITY;
+	for (Shape *shape : shapes){
+		Hit h = shape -> intersect(ray);
+		if(h.hasHit){
+			float distance = (h.point - ray.origin).length();
+			if(distance < rayDistance){
+				rayDistance = distance;
+				hit.point = h.point;
+				hit.hasHit = true;
+			}
+		}
+	}
+	return hit;
 }
 
 

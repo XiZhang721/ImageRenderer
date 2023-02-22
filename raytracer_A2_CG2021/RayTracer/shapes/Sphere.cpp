@@ -4,7 +4,7 @@
  *
  */
 #include "Sphere.h"
-
+#include <cmath>
 
 namespace rt{
 
@@ -21,8 +21,35 @@ namespace rt{
 
 		Hit h;
 		//-----------to be implemented -------------
-
-
+		
+		Vec3f L = center - ray.origin;
+		float tca = L.dotProduct(ray.direction);
+		if(tca < 0){
+			h.hasHit = false;
+			return h;
+		}
+		float d2 = L.dotProduct(L) - tca * tca;
+		if(d2 > radius * radius){
+			h.hasHit = false;
+			return h;
+		}
+		float thc = sqrt(radius * radius - d2);
+		float t0 = tca - thc;
+		float t1 = tca + thc;
+		if(t0 > t1){
+			std::swap(t0,t1);
+		}
+		if(t0 < 0){
+			t0 = t1;
+			if(t0 < 0){
+				h.hasHit = false;
+				return h;
+			}
+		}
+		h.hasHit = true;
+		h.point = ray.origin + ray.direction * t0;
+		h.normal = (h.point - center).normalize();
+		h.material = material;
 		return h;
 
 	}

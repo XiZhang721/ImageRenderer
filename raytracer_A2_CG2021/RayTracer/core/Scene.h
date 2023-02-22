@@ -25,6 +25,8 @@ public:
 
 	void createScene(Value& scenespecs);
 
+	Hit intersect(Ray ray);
+	
 	Vec3f backgroundColor{};
 
 

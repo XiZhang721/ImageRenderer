@@ -8,6 +8,7 @@
 
 #include "rapidjson/document.h"
 #include "math/geometry.h"
+#include "RayHitStructs.h"
 
 
 using namespace rapidjson;
@@ -21,12 +22,16 @@ public:
 	// Constructors
 	//
 	Camera(){};
-	Camera(int height, int width, int fov, Vec3f position, Vec3f lookat, Vec3f up):height(height), width(width), fov(fov){};
+	Camera(int height, int width, int fov, Vec3f position, Vec3f lookat, Vec3f up):height(height), width(width), fov(fov), position(position){
+		//setCameraToWorld();
+	};
 
 	//
 	// Destructor
 	//
 	virtual ~Camera();
+
+	virtual Ray createRay(int x, int y, RayType type) = 0;
 
 
 	//
@@ -46,7 +51,9 @@ public:
 	// other camera functions (to complete)
 	//
 
+	// Matrix44f getCameraToWorld() const {return cameraToWorld;};
 
+	// void setCameraToWorld();
 
 
 
@@ -88,6 +95,8 @@ protected:
 	int height;
 	int width;
 	int fov; //field of view
+	Vec3f position;
+	//Matrix44f cameraToWorld;
 
 };
 

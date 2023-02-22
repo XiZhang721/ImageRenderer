@@ -21,9 +21,9 @@ public:
 	// Constructors
 	//
 	Sphere();
-	Sphere(Vec3f center, float radius):center(center), radius(radius){};
+	Sphere(Vec3f center, float radius, Material *material):center(center), radius(radius), material(material){};
 
-	virtual ~Sphere();
+	virtual ~Sphere(){};
 
 
 	//
@@ -35,6 +35,7 @@ private:
 
 	Vec3f center;
 	float radius;
+	Material *material;
 
 };
 

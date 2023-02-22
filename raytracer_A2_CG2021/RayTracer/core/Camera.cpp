@@ -42,15 +42,43 @@ Camera* Camera::createCamera(Value& cameraSpecs){
 		return new Pinhole(cameraSpecs["width"].GetInt(),
 				cameraSpecs["height"].GetInt(),
 				cameraSpecs["fov"].GetInt(), position, lookat, up);
-
-	}else if (cameraType.compare("thinlens")==0){
-		return new ThinLens();
 	}
+	// }else if (cameraType.compare("thinlens")==0){
+	// 	return new ThinLens();
+	// }
 
 	return 0;
 
 }
 
+// void setCameraToWorld(){
+// 	Vec3f left = this->up.crossProduct(this->lookat).normalize();
+// 	Vec3f normalizedUp = this->up.normalize();
+// 	Vec3f normalizedLookat = this->lookat.normalize();
+// 	Matrix44f returnMatrix{};
+
+// 	returnMatrix[0][0] = left[0];
+// 	returnMatrix[1][0] = left[1];
+// 	returnMatrix[2][0] = left[2];
+// 	returnMatrix[3][0] = 0;
+
+// 	returnMatrix[0][1] = normalizedUp[0];
+// 	returnMatrix[1][1] = normalizedUp[1];
+// 	returnMatrix[2][1] = normalizedUp[2];
+// 	returnMatrix[3][1] = 0;
+
+// 	returnMatrix[0][2] = normalizedLookat[0];
+// 	returnMatrix[1][2] = normalizedLookat[1];
+// 	returnMatrix[2][2] = normalizedLookat[2];
+// 	returnMatrix[3][2] = 0;
+
+// 	returnMatrix[0][3] = this->position[0];
+// 	returnMatrix[1][3] = this->position[1];
+// 	returnMatrix[2][3] = this->position[2];
+// 	returnMatrix[3][3] = 1;
+
+// 	cameraToWorld = returnMatrix;
+// }
 
 
 } //namespace rt

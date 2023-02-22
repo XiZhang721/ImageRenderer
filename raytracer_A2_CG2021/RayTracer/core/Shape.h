@@ -8,7 +8,11 @@
 
 #include "core/RayHitStructs.h"
 #include "core/Material.h"
+#include "math/geometry.h"
+#include "rapidjson/document.h"
 
+
+using namespace rapidjson;
 namespace rt{
 
 class Shape{
@@ -17,12 +21,14 @@ public:
 	//
 	// Constructors
 	//
-	Shape();
+	Shape(){};
 
 	//
 	// Destructor (must be overriden in subclass)
 	//
 	virtual ~Shape();
+
+	static Shape* createShape(Value& shapeSpecs);
 
 	//
 	// Shape abstract methods (to be implemented by subclasses)
@@ -32,7 +38,6 @@ public:
 
 protected:
 
-	Material * material;
 
 };
 
