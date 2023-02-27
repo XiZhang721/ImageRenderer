@@ -10,6 +10,7 @@
 #include "core/Material.h"
 #include "math/geometry.h"
 #include "rapidjson/document.h"
+#include "materials/BlinnPhong.h"
 
 
 using namespace rapidjson;
@@ -37,7 +38,7 @@ public:
 
 
 protected:
-
+	Material *material;
 
 };
 

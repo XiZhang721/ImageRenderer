@@ -14,7 +14,11 @@ namespace rt{
 	// Pinhole constructor (example)
 	//
 	Pinhole::Pinhole(int width, int height, int fov, Vec3f position, Vec3f lookat, Vec3f up):Camera(width, height, fov, position, lookat, up){
-		this->aspectRatio = width/height;
+		this->camera_right = lookat.crossProduct(up).normalize();
+		this->new_up = this->camera_right.crossProduct(lookat);
+		this->aspect_ratio = (float)width / (float)height;
+		this->half_fov_tan = tan(fov * 0.5f * M_PI / 180.f);
+		this-> pixel_size = 2.f * half_fov_tan / (float)height;
 
 		// to fill
 
@@ -22,12 +26,11 @@ namespace rt{
 
 	Ray Pinhole::createRay(int x, int y, RayType type){
 		Ray ray;
-		float scale = tan(this->fov * ((M_PI / 180.f)/2));
-		float newX = (2 * (x + 0.5)/ (float)this->width - 1)*scale;
-		float newY = (1-2*(y+0.5)/(float)this->height) * scale * 1 / this->aspectRatio;
-		Vec3f cameraSpace = Vec3f(newX, newY, -0.5);
+		float u = (float)x / (float)this->width - 0.5f;
+		float v = ((float)y / (float)this->height - 0.5f) / this->aspect_ratio;
+		Vec3f ray_dir = (this->lookat + u * this->camera_right * half_fov_tan + v * this->new_up * half_fov_tan).normalize();
 		ray.origin = this->position;
-		ray.direction = (cameraSpace - this->position).normalize();
+		ray.direction = ray_dir;
 		ray.raytype = type;
 		return ray;
 	}

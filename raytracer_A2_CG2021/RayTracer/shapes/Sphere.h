@@ -7,8 +7,6 @@
 #ifndef SPHERE_H_
 #define SPHERE_H_
 
-#include "math/geometry.h"
-#include "core/RayHitStructs.h"
 #include "core/Shape.h"
 
 namespace rt{
@@ -21,10 +19,11 @@ public:
 	// Constructors
 	//
 	Sphere();
-	Sphere(Vec3f center, float radius, Material *material):center(center), radius(radius), material(material){};
+	Sphere(Vec3f center, float radius, Material *material):center(center), radius(radius){
+		this->material = material;
+	};
 
 	virtual ~Sphere(){};
-
 
 	//
 	// Functions that need to be implemented, since Sphere is a subclass of Shape
@@ -35,7 +34,6 @@ private:
 
 	Vec3f center;
 	float radius;
-	Material *material;
 
 };
 

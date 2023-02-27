@@ -5,7 +5,8 @@
 #include "Scene.h"
 #include "RayHitStructs.h"
 #include "shapes/Sphere.h"
-
+#include "Material.h"
+#include "materials/BlinnPhong.h"
 
 
 
@@ -50,6 +51,8 @@ Hit Scene::intersect(Ray ray){
 			if(distance < rayDistance){
 				rayDistance = distance;
 				hit.point = h.point;
+				hit.material = h.material;
+				hit.normal = h.normal;
 				hit.hasHit = true;
 			}
 		}

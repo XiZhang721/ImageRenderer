@@ -176,6 +176,7 @@ CMakeFiles/raytracer.dir/core/Scene.cpp.o
  ../core/Material.h
  ../core/RayHitStructs.h
  ../core/Shape.h
+ ../materials/BlinnPhong.h
  ../math/geometry.h
  ../parsers/rapidjson/allocators.h
  ../parsers/rapidjson/document.h
@@ -206,6 +207,7 @@ CMakeFiles/raytracer.dir/core/Shape.cpp.o
  ../core/Material.h
  ../core/RayHitStructs.h
  ../core/Shape.h
+ ../materials/BlinnPhong.h
  ../math/geometry.h
  ../parsers/rapidjson/allocators.h
  ../parsers/rapidjson/document.h
@@ -289,6 +291,7 @@ CMakeFiles/raytracer.dir/main/main.cpp.o
  ../core/RayTracer.h
  ../core/Scene.h
  ../core/Shape.h
+ ../materials/BlinnPhong.h
  ../math/geometry.h
  ../parsers/PPMWriter.h
  ../parsers/rapidjson/allocators.h
@@ -342,6 +345,7 @@ CMakeFiles/raytracer.dir/shapes/BVH.cpp.o
  ../core/Material.h
  ../core/RayHitStructs.h
  ../core/Shape.h
+ ../materials/BlinnPhong.h
  ../math/geometry.h
  ../parsers/rapidjson/allocators.h
  ../parsers/rapidjson/document.h
@@ -369,6 +373,7 @@ CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o
  ../core/Material.h
  ../core/RayHitStructs.h
  ../core/Shape.h
+ ../materials/BlinnPhong.h
  ../math/geometry.h
  ../parsers/rapidjson/allocators.h
  ../parsers/rapidjson/document.h
@@ -396,6 +401,7 @@ CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o
  ../core/Material.h
  ../core/RayHitStructs.h
  ../core/Shape.h
+ ../materials/BlinnPhong.h
  ../math/geometry.h
  ../parsers/rapidjson/allocators.h
  ../parsers/rapidjson/document.h
@@ -423,6 +429,7 @@ CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o
  ../core/Material.h
  ../core/RayHitStructs.h
  ../core/Shape.h
+ ../materials/BlinnPhong.h
  ../math/geometry.h
  ../parsers/rapidjson/allocators.h
  ../parsers/rapidjson/document.h

@@ -20,6 +20,7 @@ public:
     BlinnPhong(float ks, float kd, float kr, int specularexponent, Vec3f diffusecolor, std::string tPath, int tWidth, int tHeight):
         ks(ks), kd(kd), kr(kr), specularexponent(specularexponent), diffusecolor(diffusecolor), tPath(tPath), tWidth(tWidth), tHeight(tHeight){};
 
+    Vec3f GetDiffuseColor() const {return diffusecolor;};
     float ks;
     float kd;
     float kr;

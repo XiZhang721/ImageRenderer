@@ -26,13 +26,18 @@ public:
 	//Destructor
 	//
 	~Pinhole(){};
-
-	float aspectRatio;
 	
 	//
 	// print function (implementing abstract function of base class)
 	//
 	void printCamera();
+
+private:
+	Vec3f camera_right;
+	Vec3f new_up;
+	float aspect_ratio;
+	float half_fov_tan;
+	float pixel_size;
 };
 
 

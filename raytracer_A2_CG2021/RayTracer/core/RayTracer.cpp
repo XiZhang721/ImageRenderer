@@ -7,6 +7,7 @@
 #include "RayHitStructs.h"
 #include "materials/BlinnPhong.h"
 #include "shapes/Sphere.h"
+#include "Material.h"
 
 
 namespace rt{
@@ -26,13 +27,14 @@ Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 	int cameraHeight = camera->getHeight();
 	Vec3f* pixelbuffer=new Vec3f[cameraWidth * cameraHeight];
 
+
 	//----------main rendering function to be filled------
 	for(int row = 0; row < cameraHeight; row++){
 		for(int column = 0; column < cameraWidth; column++){
 			Ray ray = camera->createRay(column,row, PRIMARY);
 			Vec3f hitColor = RayTracer::castRay(ray, scene, nbounces);
+			pixelbuffer[row * cameraWidth + column] = hitColor;
 			std::printf("Progress: %d\n",row * cameraWidth + column);
-
 		}
 	}
 
@@ -51,8 +53,9 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int nbounces){
 	if(!hit.hasHit){
 		return scene->backgroundColor;
 	}
-	auto *material = (BlinnPhong *) hit.material;
-	Vec3f ambient = material->diffusecolor;
+
+	BlinnPhong *material = (BlinnPhong *) hit.material;
+	Vec3f ambient = material->GetDiffuseColor();
 	return ambient;
 }
 
@@ -74,10 +77,9 @@ Vec3f* RayTracer::tonemap(Vec3f* pixelbuffer, int cameraWidth, int cameraHeight)
 		for(int j = 0; j < 3; j++){
 			pixel[j] = (float)std::max((int)pixel[j],0);
 			pixel[j] = (float)std::min((int)pixel[j],255);
-			
 		}
 		pixelbuffer[i] = pixel;
-		std::printf("Progress: %d\n",i);
+		//std::printf("Progress: %d\n",i);
 	}
 
 	return pixelbuffer;

@@ -22,7 +22,7 @@ public:
 	// Constructors
 	//
 	Camera(){};
-	Camera(int height, int width, int fov, Vec3f position, Vec3f lookat, Vec3f up):height(height), width(width), fov(fov), position(position){
+	Camera(int height, int width, int fov, Vec3f position, Vec3f lookat, Vec3f up):height(height), width(width), fov(fov), position(position), lookat(lookat), up(up){
 		//setCameraToWorld();
 	};
 
@@ -57,15 +57,6 @@ public:
 
 
 
-
-
-
-
-
-
-
-
-
 	//
 	// Getters and Setters
 	//
@@ -96,6 +87,8 @@ protected:
 	int width;
 	int fov; //field of view
 	Vec3f position;
+	Vec3f lookat;
+	Vec3f up;
 	//Matrix44f cameraToWorld;
 
 };
