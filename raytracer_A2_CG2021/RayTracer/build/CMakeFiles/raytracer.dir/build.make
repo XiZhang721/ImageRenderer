@@ -226,9 +226,22 @@ CMakeFiles/raytracer.dir/shapes/BVH.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer.dir/shapes/BVH.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/BVH.cpp -o CMakeFiles/raytracer.dir/shapes/BVH.cpp.s
 
+CMakeFiles/raytracer.dir/shapes/Plane.cpp.o: CMakeFiles/raytracer.dir/flags.make
+CMakeFiles/raytracer.dir/shapes/Plane.cpp.o: ../shapes/Plane.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/raytracer.dir/shapes/Plane.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer.dir/shapes/Plane.cpp.o -c /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Plane.cpp
+
+CMakeFiles/raytracer.dir/shapes/Plane.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/raytracer.dir/shapes/Plane.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Plane.cpp > CMakeFiles/raytracer.dir/shapes/Plane.cpp.i
+
+CMakeFiles/raytracer.dir/shapes/Plane.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/raytracer.dir/shapes/Plane.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Plane.cpp -o CMakeFiles/raytracer.dir/shapes/Plane.cpp.s
+
 CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o: CMakeFiles/raytracer.dir/flags.make
 CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o: ../shapes/Sphere.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o -c /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Sphere.cpp
 
 CMakeFiles/raytracer.dir/shapes/Sphere.cpp.i: cmake_force
@@ -241,7 +254,7 @@ CMakeFiles/raytracer.dir/shapes/Sphere.cpp.s: cmake_force
 
 CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o: CMakeFiles/raytracer.dir/flags.make
 CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o: ../shapes/TriMesh.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o -c /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/TriMesh.cpp
 
 CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.i: cmake_force
@@ -254,7 +267,7 @@ CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.s: cmake_force
 
 CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o: CMakeFiles/raytracer.dir/flags.make
 CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o: ../shapes/Triangle.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o -c /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Triangle.cpp
 
 CMakeFiles/raytracer.dir/shapes/Triangle.cpp.i: cmake_force
@@ -280,6 +293,7 @@ raytracer_OBJECTS = \
 "CMakeFiles/raytracer.dir/main/main.cpp.o" \
 "CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o" \
 "CMakeFiles/raytracer.dir/shapes/BVH.cpp.o" \
+"CMakeFiles/raytracer.dir/shapes/Plane.cpp.o" \
 "CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o" \
 "CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o" \
 "CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o"
@@ -300,12 +314,13 @@ raytracer: CMakeFiles/raytracer.dir/lights/PointLight.cpp.o
 raytracer: CMakeFiles/raytracer.dir/main/main.cpp.o
 raytracer: CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o
 raytracer: CMakeFiles/raytracer.dir/shapes/BVH.cpp.o
+raytracer: CMakeFiles/raytracer.dir/shapes/Plane.cpp.o
 raytracer: CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o
 raytracer: CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o
 raytracer: CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o
 raytracer: CMakeFiles/raytracer.dir/build.make
 raytracer: CMakeFiles/raytracer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable raytracer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable raytracer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/raytracer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

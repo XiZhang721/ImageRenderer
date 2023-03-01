@@ -4,7 +4,6 @@
  *
  */
 #include <iostream>
-
 #include "Pinhole.h"
 
 
@@ -15,11 +14,10 @@ namespace rt{
 	//
 	Pinhole::Pinhole(int width, int height, int fov, Vec3f position, Vec3f lookat, Vec3f up):Camera(width, height, fov, position, lookat, up){
 		this->camera_right = lookat.crossProduct(up).normalize();
-		this->new_up = this->camera_right.crossProduct(lookat);
+		this->new_up = this->camera_right.crossProduct(lookat).normalize();
 		this->aspect_ratio = (float)width / (float)height;
 		this->half_fov_tan = tan(fov * 0.5f * M_PI / 180.f);
-		this-> pixel_size = 2.f * half_fov_tan / (float)height;
-
+		this-> pixel_size = 2.f * half_fov_tan;
 		// to fill
 
 	}
@@ -28,7 +26,7 @@ namespace rt{
 		Ray ray;
 		float u = (float)x / (float)this->width - 0.5f;
 		float v = ((float)y / (float)this->height - 0.5f) / this->aspect_ratio;
-		Vec3f ray_dir = (this->lookat + u * this->camera_right * half_fov_tan + v * this->new_up * half_fov_tan).normalize();
+		Vec3f ray_dir = (this->lookat + u * this->camera_right * pixel_size - v * this->new_up * pixel_size).normalize();
 		ray.origin = this->position;
 		ray.direction = ray_dir;
 		ray.raytype = type;

@@ -8,6 +8,7 @@
 #include "materials/BlinnPhong.h"
 #include "shapes/Sphere.h"
 #include "Material.h"
+#include <math.h>
 
 
 namespace rt{
@@ -29,12 +30,12 @@ Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 
 
 	//----------main rendering function to be filled------
-	for(int row = 0; row < cameraHeight; row++){
-		for(int column = 0; column < cameraWidth; column++){
-			Ray ray = camera->createRay(column,row, PRIMARY);
+	for(int y = 0; y < cameraHeight; y++){
+		for(int x = 0; x < cameraWidth; x++){
+			Ray ray = camera->createRay(x, y, PRIMARY);
 			Vec3f hitColor = RayTracer::castRay(ray, scene, nbounces);
-			pixelbuffer[row * cameraWidth + column] = hitColor;
-			std::printf("Progress: %d\n",row * cameraWidth + column);
+			pixelbuffer[y * cameraWidth + x] = hitColor;
+			//std::printf("Progress: %d\n",y* cameraWidth + column);
 		}
 	}
 
@@ -55,8 +56,26 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int nbounces){
 	}
 
 	BlinnPhong *material = (BlinnPhong *) hit.material;
-	Vec3f ambient = material->GetDiffuseColor();
-	return ambient;
+	Vec3f color = material->GetDiffuseColor();
+	float Ia = 0.f;
+	for(LightSource *light : scene->getLightSources()){
+		Vec3f lightDir = (hit.point-light->position).normalize();
+		lightDir = lightDir.normalize();		
+
+		Ray shadowRay;
+		shadowRay.origin = light->position;
+		shadowRay.direction = lightDir;
+		shadowRay.raytype = SHADOW;
+		Hit shadowHit = scene->intersect(shadowRay);
+		if(shadowHit.hasHit && checkTwoPoints(shadowHit.point, hit.point)){
+			continue;
+		}else{
+			color = scene->backgroundColor;
+		}
+		
+		
+	}
+	return color;
 }
 
 /**
@@ -73,7 +92,7 @@ Vec3f* RayTracer::tonemap(Vec3f* pixelbuffer, int cameraWidth, int cameraHeight)
 	int pixelCount = cameraWidth * cameraHeight;
 	for(int i = 0; i < pixelCount; i++){
 		Vec3f pixel = pixelbuffer[i];
-		pixel *=255;
+		pixel *=255.f;
 		for(int j = 0; j < 3; j++){
 			pixel[j] = (float)std::max((int)pixel[j],0);
 			pixel[j] = (float)std::min((int)pixel[j],255);

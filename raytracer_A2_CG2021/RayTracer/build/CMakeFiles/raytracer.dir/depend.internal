@@ -198,6 +198,7 @@ CMakeFiles/raytracer.dir/core/Scene.cpp.o
  ../parsers/rapidjson/rapidjson.h
  ../parsers/rapidjson/reader.h
  ../parsers/rapidjson/stream.h
+ ../shapes/Plane.h
  ../shapes/Sphere.h
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Material.h
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/RayHitStructs.h
@@ -229,7 +230,9 @@ CMakeFiles/raytracer.dir/core/Shape.cpp.o
  ../parsers/rapidjson/rapidjson.h
  ../parsers/rapidjson/reader.h
  ../parsers/rapidjson/stream.h
+ ../shapes/Plane.h
  ../shapes/Sphere.h
+ ../shapes/Triangle.h
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Material.h
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Shape.cpp
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Shape.h
@@ -369,6 +372,34 @@ CMakeFiles/raytracer.dir/shapes/BVH.cpp.o
  ../parsers/rapidjson/stream.h
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/BVH.cpp
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/BVH.h
+CMakeFiles/raytracer.dir/shapes/Plane.cpp.o
+ ../core/Material.h
+ ../core/RayHitStructs.h
+ ../core/Shape.h
+ ../materials/BlinnPhong.h
+ ../math/geometry.h
+ ../parsers/rapidjson/allocators.h
+ ../parsers/rapidjson/document.h
+ ../parsers/rapidjson/encodedstream.h
+ ../parsers/rapidjson/encodings.h
+ ../parsers/rapidjson/error/error.h
+ ../parsers/rapidjson/internal/biginteger.h
+ ../parsers/rapidjson/internal/diyfp.h
+ ../parsers/rapidjson/internal/ieee754.h
+ ../parsers/rapidjson/internal/meta.h
+ ../parsers/rapidjson/internal/pow10.h
+ ../parsers/rapidjson/internal/stack.h
+ ../parsers/rapidjson/internal/strfunc.h
+ ../parsers/rapidjson/internal/strtod.h
+ ../parsers/rapidjson/internal/swap.h
+ ../parsers/rapidjson/memorystream.h
+ ../parsers/rapidjson/msinttypes/inttypes.h
+ ../parsers/rapidjson/msinttypes/stdint.h
+ ../parsers/rapidjson/rapidjson.h
+ ../parsers/rapidjson/reader.h
+ ../parsers/rapidjson/stream.h
+ /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Plane.cpp
+ /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Plane.h
 CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o
  ../core/Material.h
  ../core/RayHitStructs.h

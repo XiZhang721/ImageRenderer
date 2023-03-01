@@ -253,6 +253,10 @@ encodings.h
 ../shapes/Sphere.h
 core/Shape.h
 ../shapes/core/Shape.h
+iostream
+-
+fstream
+-
 
 /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Material.h
 rapidjson/document.h
@@ -277,6 +281,8 @@ shapes/Sphere.h
 /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/shapes/Sphere.h
 Material.h
 /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Material.h
+math.h
+-
 
 /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/RayTracer.h
 math/geometry.h
@@ -285,28 +291,6 @@ core/Camera.h
 /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/core/Camera.h
 core/Scene.h
 /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/core/Scene.h
-
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Scene.cpp
-Scene.h
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Scene.h
-RayHitStructs.h
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/RayHitStructs.h
-shapes/Sphere.h
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/shapes/Sphere.h
-Material.h
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Material.h
-materials/BlinnPhong.h
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/materials/BlinnPhong.h
-
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Scene.h
-vector
+math.h
 -
-rapidjson/document.h
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/rapidjson/document.h
-math/geometry.h
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/math/geometry.h
-core/LightSource.h
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/core/LightSource.h
-core/Shape.h
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/core/Shape.h
 

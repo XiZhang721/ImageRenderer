@@ -5,6 +5,8 @@
  
 #include "Shape.h"
 #include "shapes/Sphere.h"
+#include "shapes/Plane.h"
+#include "shapes/Triangle.h"
 #include "Material.h"
 
 
@@ -26,6 +28,19 @@ namespace rt{
             float radius = shapeSpecs["radius"].GetFloat();
             Material *material = Material::createMaterial((Value&) shapeSpecs["material"]);
             return new Sphere(center,radius, material);
+        }else if(shapeType.compare("plane") == 0){
+            Vec3f v0 = {shapeSpecs["v0"][0].GetFloat(),shapeSpecs["v0"][1].GetFloat(),shapeSpecs["v0"][2].GetFloat()};
+            Vec3f v1 = {shapeSpecs["v1"][0].GetFloat(),shapeSpecs["v1"][1].GetFloat(),shapeSpecs["v1"][2].GetFloat()};
+            Vec3f v2 = {shapeSpecs["v2"][0].GetFloat(),shapeSpecs["v2"][1].GetFloat(),shapeSpecs["v2"][2].GetFloat()};
+            Vec3f v3 = {shapeSpecs["v3"][0].GetFloat(),shapeSpecs["v3"][1].GetFloat(),shapeSpecs["v3"][2].GetFloat()};
+            Material *material = Material::createMaterial((Value&) shapeSpecs["material"]);
+            return new Plane(v0,v1,v2,v3,material);
+        }else if(shapeType.compare("triangle") == 0){
+            Vec3f v0 = {shapeSpecs["v0"][0].GetFloat(),shapeSpecs["v0"][1].GetFloat(),shapeSpecs["v0"][2].GetFloat()};
+            Vec3f v1 = {shapeSpecs["v1"][0].GetFloat(),shapeSpecs["v1"][1].GetFloat(),shapeSpecs["v1"][2].GetFloat()};
+            Vec3f v2 = {shapeSpecs["v2"][0].GetFloat(),shapeSpecs["v2"][1].GetFloat(),shapeSpecs["v2"][2].GetFloat()};
+            Material *material = Material::createMaterial((Value&) shapeSpecs["material"]);
+            return new Triangle(v0,v1,v2,material);
         }
         return nullptr;
     }

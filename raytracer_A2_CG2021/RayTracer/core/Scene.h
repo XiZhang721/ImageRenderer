@@ -29,6 +29,8 @@ public:
 	
 	Vec3f backgroundColor{};
 
+	std::vector<LightSource*> getLightSources() const {return lightSources;};
+
 
 private:
 

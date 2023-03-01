@@ -17,18 +17,14 @@ enum RayType {PRIMARY, SECONDARY, SHADOW};
 
 struct Ray{
 public:
-
 	Vec3f origin;
 	Vec3f direction;
 	RayType raytype;
-
-
 	//----------Ray variables to be filled------
 };
 
 
 struct Hit{
-
 	Vec3f point; //point where ray hits a shape
 	//----------Hit variables to be filled------
 	bool hasHit; // if the ray hits an object

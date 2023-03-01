@@ -12,6 +12,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/raytracer.dir/main/main.cpp.o"
   "CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o"
   "CMakeFiles/raytracer.dir/shapes/BVH.cpp.o"
+  "CMakeFiles/raytracer.dir/shapes/Plane.cpp.o"
   "CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o"
   "CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o"
   "CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o"

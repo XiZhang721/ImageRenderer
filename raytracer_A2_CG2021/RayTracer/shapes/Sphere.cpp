@@ -33,15 +33,15 @@ namespace rt{
 			h.hasHit = false;
 			return h;
 		}
-		float thc = sqrt(radius * radius - d2);
+		float thc = sqrtf(radius * radius - d2);
 		float t0 = tca - thc;
 		float t1 = tca + thc;
 		if(t0 > t1){
 			std::swap(t0,t1);
 		}
-		if(t0 < 0){
+		if(t0 < 1e-4){
 			t0 = t1;
-			if(t0 < 0){
+			if(t0 < 1e-4){
 				h.hasHit = false;
 				return h;
 			}

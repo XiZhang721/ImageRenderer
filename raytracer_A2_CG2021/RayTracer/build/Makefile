@@ -554,6 +554,33 @@ shapes/BVH.cpp.s:
 	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/shapes/BVH.cpp.s
 .PHONY : shapes/BVH.cpp.s
 
+shapes/Plane.o: shapes/Plane.cpp.o
+
+.PHONY : shapes/Plane.o
+
+# target to build an object file
+shapes/Plane.cpp.o:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/shapes/Plane.cpp.o
+.PHONY : shapes/Plane.cpp.o
+
+shapes/Plane.i: shapes/Plane.cpp.i
+
+.PHONY : shapes/Plane.i
+
+# target to preprocess a source file
+shapes/Plane.cpp.i:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/shapes/Plane.cpp.i
+.PHONY : shapes/Plane.cpp.i
+
+shapes/Plane.s: shapes/Plane.cpp.s
+
+.PHONY : shapes/Plane.s
+
+# target to generate assembly for a file
+shapes/Plane.cpp.s:
+	$(MAKE) -f CMakeFiles/raytracer.dir/build.make CMakeFiles/raytracer.dir/shapes/Plane.cpp.s
+.PHONY : shapes/Plane.cpp.s
+
 shapes/Sphere.o: shapes/Sphere.cpp.o
 
 .PHONY : shapes/Sphere.o
@@ -691,6 +718,9 @@ help:
 	@echo "... shapes/BVH.o"
 	@echo "... shapes/BVH.i"
 	@echo "... shapes/BVH.s"
+	@echo "... shapes/Plane.o"
+	@echo "... shapes/Plane.i"
+	@echo "... shapes/Plane.s"
 	@echo "... shapes/Sphere.o"
 	@echo "... shapes/Sphere.i"
 	@echo "... shapes/Sphere.s"

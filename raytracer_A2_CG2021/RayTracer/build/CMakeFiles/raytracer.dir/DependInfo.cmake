@@ -17,6 +17,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/main/main.cpp" "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/raytracer.dir/main/main.cpp.o"
   "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/materials/BlinnPhong.cpp" "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o"
   "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/BVH.cpp" "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/raytracer.dir/shapes/BVH.cpp.o"
+  "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Plane.cpp" "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/raytracer.dir/shapes/Plane.cpp.o"
   "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Sphere.cpp" "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/raytracer.dir/shapes/Sphere.cpp.o"
   "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/TriMesh.cpp" "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o"
   "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Triangle.cpp" "/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/build/CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o"

@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "RayHitStructs.h"
 #include "shapes/Sphere.h"
+#include "shapes/Plane.h"
 #include "Material.h"
 #include "materials/BlinnPhong.h"
 
