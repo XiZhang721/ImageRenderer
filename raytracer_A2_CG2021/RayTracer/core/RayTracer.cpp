@@ -55,27 +55,40 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int nbounces){
 		return scene->backgroundColor;
 	}
 
+	Vec3f Ia = scene->backgroundColor;
+	Vec3f Id = Vec3f(0.f,0.f,0.f);
+	Vec3f Is = Vec3f(0.f,0.f,0.f);
+
 	BlinnPhong *material = (BlinnPhong *) hit.material;
-	Vec3f color = material->GetDiffuseColor();
-	float Ia = 0.f;
+	Vec3f color{};
+	//Ia = Ia + color;
 	for(LightSource *light : scene->getLightSources()){
 		Vec3f lightDir = (hit.point-light->position).normalize();
-		lightDir = lightDir.normalize();		
-
+		float distance = (hit.point - light->position).length();
+		Vec3f lightColor = Vec3f(1.f,1.f,1.f);
+		float attenuation = 1.f / (distance * distance * 11.f);
 		Ray shadowRay;
 		shadowRay.origin = light->position;
 		shadowRay.direction = lightDir;
 		shadowRay.raytype = SHADOW;
 		Hit shadowHit = scene->intersect(shadowRay);
 		if(shadowHit.hasHit && checkTwoPoints(shadowHit.point, hit.point)){
-			continue;
+			Vec3f normal = -shadowHit.normal.normalize();
+			float diffuse_intensity = std::max(0.f,lightDir.dotProduct(normal));
+			//color = material->diffusecolor;
+			Id = Id + material->kd * light->id * diffuse_intensity * attenuation * material->diffusecolor;
+			//color = color + material->diffusecolor * attenuation * diffuseDot;
+			
+			Vec3f reflectDir = (2.f * lightDir.dotProduct(normal) * normal) - lightDir;
+			float specDot = reflectDir.dotProduct(-ray.direction);
+			//Is = Is + material->ks * std::pow(specDot, material->specularexponent) * light->is * Vec3f(1.f,1.f,1.f);
 		}else{
-			color = scene->backgroundColor;
+			continue;
 		}
 		
 		
 	}
-	return color;
+	return color + Ia + Id + Is;
 }
 
 /**
