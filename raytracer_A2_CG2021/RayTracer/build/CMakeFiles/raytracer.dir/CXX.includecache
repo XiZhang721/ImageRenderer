@@ -283,6 +283,8 @@ Material.h
 /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Material.h
 math.h
 -
+fstream
+-
 
 /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/RayTracer.h
 math/geometry.h

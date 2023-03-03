@@ -49,6 +49,9 @@ Hit Scene::intersect(Ray ray){
 		Hit h = shape -> intersect(ray);
 		if(h.hasHit){
 			float distance = (h.point - ray.origin).length();
+			if(distance <= 1e-3){
+				continue;
+			}
 			if(distance < rayDistance){
 				rayDistance = distance;
 				hit.point = h.point;

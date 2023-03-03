@@ -23,10 +23,6 @@ public:
 	Sphere();
 	Sphere(Vec3f center, float radius, Material *material):center(center), radius(radius){
 		this->material = material;
-		std::printf("center x: %f\n",center[0]);
-		std::printf("center y: %f\n",center[1]);
-		std::printf("center z: %f\n",center[2]);
-		std::printf("radius: %f\n",radius);
 	};
 
 	virtual ~Sphere(){};

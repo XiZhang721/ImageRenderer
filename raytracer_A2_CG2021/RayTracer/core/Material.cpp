@@ -12,6 +12,8 @@ namespace rt{
         float kr;
         if(materialSpecs.HasMember("kr")){
             kr = materialSpecs["kr"].GetFloat();
+        }else{
+            kr = -1.f;
         }
         int specularexponent = materialSpecs["specularexponent"].GetInt();
         Vec3f diffusecolor = {materialSpecs["diffusecolor"][0].GetFloat(),
