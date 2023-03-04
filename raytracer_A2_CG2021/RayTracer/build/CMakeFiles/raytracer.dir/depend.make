@@ -343,6 +343,7 @@ CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o: ../parsers/rapidjson/reader
 CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o: ../parsers/rapidjson/stream.h
 CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o: ../materials/BlinnPhong.cpp
 CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o: ../materials/BlinnPhong.h
+CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o: ../materials/stb_image.h
 
 CMakeFiles/raytracer.dir/shapes/BVH.cpp.o: ../core/Material.h
 CMakeFiles/raytracer.dir/shapes/BVH.cpp.o: ../core/RayHitStructs.h

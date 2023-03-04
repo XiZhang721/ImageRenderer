@@ -344,6 +344,7 @@ CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o
  ../parsers/rapidjson/stream.h
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/materials/BlinnPhong.cpp
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/materials/BlinnPhong.h
+ /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/materials/stb_image.h
 CMakeFiles/raytracer.dir/shapes/BVH.cpp.o
  ../core/Material.h
  ../core/RayHitStructs.h
