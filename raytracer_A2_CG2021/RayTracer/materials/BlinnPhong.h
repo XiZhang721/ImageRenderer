@@ -16,9 +16,8 @@ namespace rt{
 class BlinnPhong: public Material{
 
 public:
-
-    BlinnPhong(float ks, float kd, float kr, int specularexponent, Vec3f diffusecolor, std::string tPath, int tWidth, int tHeight):
-        ks(ks), kd(kd), kr(kr), specularexponent(specularexponent), diffusecolor(diffusecolor), tPath(tPath), tWidth(tWidth), tHeight(tHeight){};
+    BlinnPhong();
+    BlinnPhong(float ks, float kd, float kr, int specularexponent, Vec3f diffusecolor, std::string tPath, int tWidth, int tHeight);
 
     Vec3f GetDiffuseColor() const {return diffusecolor;};
     float ks;
@@ -29,6 +28,8 @@ public:
     std::string tPath;
     int tWidth;
     int tHeight;   
+
+    Vec3f* texture;
 
 private:
     
