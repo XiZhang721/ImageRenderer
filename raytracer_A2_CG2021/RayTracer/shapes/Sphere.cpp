@@ -50,6 +50,13 @@ namespace rt{
 		h.point = ray.origin + ray.direction * t0;
 		h.normal = (h.point - center).normalize();
 		h.material = material;
+		float phi = acos(h.normal[2]);
+		float theta = atan2(h.normal[1], h.normal[0]);
+		if(theta < 0.f){
+			theta += 2.f * M_PI;
+		}
+		h.u = theta / (2.f * M_PI);
+		h.v = phi / M_PI;
 		return h;
 
 	}

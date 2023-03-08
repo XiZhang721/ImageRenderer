@@ -78,8 +78,24 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 		}
 		Vec3f normal = -shadowHit.normal.normalize();
 		float diffuse_intensity = std::max(0.f,light_dir.dotProduct(normal));
+		if(material->tPath.size() > 0){
+			int x = hit.u * material->tWidth;
+			int y = hit.v * material->tHeight;
+			x = x % material->tWidth;
+			y = y % material->tHeight;
+			if(x < 0) x += material->tWidth;
+			if(y < 0) y += material-> tHeight;
+			int index = x + y * material-> tWidth;
+			Id = Id + material->kd * light->id * diffuse_intensity * attenuation * material->texture[index];
+		}else{
+			Id = Id + material->kd * light->id * diffuse_intensity * attenuation * material->diffusecolor;
+		}
+		
+
+
+
 		// Diffuse
-		Id = Id + material->kd * light->id * diffuse_intensity * attenuation * material->diffusecolor;
+		
 		//color = color + material->diffusecolor * attenuation * diffuseDot;
 			
 		// Specular

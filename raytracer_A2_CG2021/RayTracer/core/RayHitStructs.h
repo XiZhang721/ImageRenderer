@@ -30,6 +30,8 @@ struct Hit{
 	bool hasHit; // if the ray hits an object
 	Vec3f normal;
 	Material *material;
+	float u;
+	float v;
 };
 
 }

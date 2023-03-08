@@ -44,6 +44,11 @@ namespace rt{
 			h.normal = normal;
 			h.material = material;
 			h.hasHit = true;
+			Vec3f q = (intersection - v0);
+			float uCoord = q.dotProduct(e1)/ e1.length();
+			float vCoord = q.dotProduct(e2)/ e2.length();
+			h.u = uCoord / e1.length();
+			h.v = vCoord / e2.length();
 			return h;
 		}else{
 			h.hasHit = false;

@@ -58,6 +58,8 @@ Hit Scene::intersect(Ray ray){
 				hit.material = h.material;
 				hit.normal = h.normal;
 				hit.hasHit = true;
+				hit.u = h.u;
+				hit.v = h.v;
 			}
 		}
 	}
