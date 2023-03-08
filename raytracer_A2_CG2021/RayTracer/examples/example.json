@@ -77,7 +77,10 @@
             "ks": 0.6,
             "kd": 1.0,
             "specularexponent": 10,
-            "diffusecolor": [1.0, 0.2, 0.2]
+            "diffusecolor": [1.0, 0.2, 0.2],
+            "tPath": "../textures/left_wall.jpg",
+            "tWidth": 500,
+            "tHeight": 500
         }
     },
     {
@@ -90,7 +93,10 @@
             "ks": 0.6,
             "kd": 1.0,
             "specularexponent": 10,
-            "diffusecolor": [0.2, 0.2, 1.0]
+            "diffusecolor": [0.2, 0.2, 1.0],
+            "tPath": "../textures/right_wall.jpg",
+            "tWidth": 500,
+            "tHeight": 500
         }
     }
     ]

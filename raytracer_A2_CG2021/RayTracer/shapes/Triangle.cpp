@@ -45,6 +45,13 @@ namespace rt{
         hit.point = intersection;
         hit.material = material;
         hit.normal = e1.crossProduct(e2).normalize();
+        if(u > 0){
+            u = -u;
+            v = -v;
+        }
+
+        hit.u = v;
+        hit.v = u;
         return hit;
 
 
