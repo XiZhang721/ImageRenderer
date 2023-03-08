@@ -224,17 +224,13 @@ rapidjson.h
 encodings.h
 ../parsers/rapidjson/encodings.h
 
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Plane.cpp
-Plane.h
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Plane.h
-cmath
+/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Triangle.cpp
+Triangle.h
+/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Triangle.h
+math.h
 -
 
-/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Plane.h
+/home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Triangle.h
 core/Shape.h
 /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/core/Shape.h
-iostream
--
-fstream
--
 
