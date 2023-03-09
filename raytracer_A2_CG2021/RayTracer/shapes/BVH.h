@@ -46,6 +46,9 @@ public:
 
     static bool checkBounding(Ray ray, BoundingBox box);
 
+    Vec3f getCenter(){
+        return Vec3f{0.f,0.f,0.f};
+    }
     std::vector<Shape*> BVHShapes;
     BVHNode* root;
 

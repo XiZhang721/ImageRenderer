@@ -24,6 +24,8 @@ public:
 		this->material = material;
 		this->shapeType = "plane";
 
+		Vec3f sum = v0 + v1 + v2 + v3;
+		this->center = Vec3f{sum.x/4.f,sum.y/4.f,sum.z/4.f};
 		float max_x = std::max(std::max(std::max(v0.x, v1.x),v2.x),v3.x);
 		float max_y = std::max(std::max(std::max(v0.y, v1.y),v2.y),v3.y);
 		float max_z = std::max(std::max(std::max(v0.z, v1.z),v2.z),v3.z);
@@ -43,7 +45,9 @@ public:
 	//
 	Hit intersect(Ray ray);
 
-
+	Vec3f getCenter(){
+		return this->center;
+	}
 
 
 private:
@@ -51,6 +55,7 @@ private:
     Vec3f v1;
     Vec3f v2;
     Vec3f v3;
+	Vec3f center;
 
 };
 

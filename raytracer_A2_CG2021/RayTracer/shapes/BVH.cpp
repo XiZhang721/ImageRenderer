@@ -32,18 +32,67 @@ namespace rt{
             return node;
         }
 
-        //Split the shapes into two parts
-        int l_num = shapes.size()/2;
+        // Split the shapes into two parts
         std::vector<Shape *> left;
         std::vector<Shape *> right;
-        std::vector<Shape *>::iterator middleItr(shapes.begin() + l_num);
-        for(auto it = shapes.begin(); it != shapes.end(); ++it){
-            if(std::distance(it, middleItr) > 0){
-                left.push_back(*it);
-            }else{
-                right.push_back(*it);
+        // Skip the complex spliting if only two shapes
+        if(shapes.size() == 2){
+            left.push_back(shapes.at(0));
+            right.push_back(shapes.at(1));
+        }else{ 
+            //find the left most shape and right most shape;
+            Shape* left_most = shapes.at(0);
+            Shape* right_most = shapes.at(0);
+            for(auto it = shapes.begin(); it != shapes.end(); ++it){
+                Shape* currShape = *it;
+                if(currShape->getCenter().x < left_most->getCenter().x){
+                    left_most = currShape;
+                }
+                if(currShape->getCenter().x > right_most->getCenter().x){
+                    right_most = currShape;
+                }
+            }
+            left.push_back(left_most);
+            right.push_back(right_most);
+            int l = shapes.size() / 2;
+            //Now split the shapes by the distance of their centers
+            for(auto it = shapes.begin(); it != shapes.end(); ++it){
+                Shape* currShape = *it;
+                if(currShape == left_most){
+                    continue;
+                }
+                if(currShape == right_most){
+                    continue;
+                }
+                if(left.size() >= l){
+                    right.push_back(currShape);
+                    continue;
+                }
+                if (right.size() >= l){
+                    left.push_back(currShape);
+                    continue;
+                }
+
+                float center_to_left = (currShape->getCenter() - left_most->getCenter()).length();
+                float center_to_right = (currShape->getCenter() - right_most->getCenter()).length();
+                if(center_to_left < center_to_right){
+                    left.push_back(currShape);
+                }else{
+                    right.push_back(currShape);
+                } 
             }
         }
+
+
+        
+        
+        // for(auto it = shapes.begin(); it != shapes.end(); ++it){
+        //     if(std::distance(it, middleItr) > 0){
+        //         left.push_back(*it);
+        //     }else{
+        //         right.push_back(*it);
+        //     }
+        // }
         
         BVHNode* leftNode = BVH::BuildBVHTree(left);
         BVHNode* rightNode = BVH::BuildBVHTree(right);
@@ -188,25 +237,6 @@ namespace rt{
         float t_enter = std::max(std::max(t_enter_x, t_enter_y),t_enter_z);
         float t_exit = std::min(std::min(t_exit_x, t_exit_y),t_exit_z);
         return t_enter <= t_exit;
-        // float t_min = (box.min.x - ray.origin.x) * inv_dir.x;
-        // float t_max = (box.max.x - ray.origin.x) * inv_dir.x;
-        // float t_y_min = (box.min.y - ray.origin.y) * inv_dir.y;
-        // float t_y_max = (box.max.y - ray.origin.y) * inv_dir.y;
-        // if((t_min > t_y_max)||(t_y_min > t_max)){
-        //     return false;
-        // }
-        // if(t_y_min > t_min){
-        //     t_min = t_y_min;
-        // }
-        // if(t_y_max < t_max){
-        //     t_max = t_y_max;
-        // }
-        // float t_z_min = (box.min.z - ray.origin.z)* inv_dir.z;
-        // float t_z_max = (box.max.z - ray.origin.z)* inv_dir.z;
-        // if((t_min > t_z_max)||(t_z_min > t_max)){
-        //     return false;
-        // }
-        // return true;
     }
 
 } // namespace rt
