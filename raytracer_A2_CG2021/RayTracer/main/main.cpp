@@ -15,6 +15,7 @@
 #include "core/RayTracer.h"
 #include "core/Camera.h"
 #include "core/Scene.h"
+#include <time.h>
 
 
 using namespace rt;
@@ -47,6 +48,8 @@ int main(int argc, char* argv[]){
 	//
 	// Main function, render scene
 	//
+
+	printf("Start rendering\n");
 	Vec3f* pixelbuffer=RayTracer::render(camera, scene, d["nbounces"].GetInt());
 	std::printf("Finish rendering\n");
 	int cameraWidth = camera->getWidth();

@@ -28,6 +28,7 @@ namespace rt{
 		float v = ((float)y / (float)this->height - 0.5f) / this->aspect_ratio;
 		Vec3f ray_dir = (this->lookat + u * this->camera_right * pixel_size - v * this->new_up * pixel_size).normalize();
 		ray.origin = this->position;
+		ray.inv_dir = 1.f / ray_dir;
 		ray.direction = ray_dir;
 		ray.raytype = type;
 		return ray;

@@ -19,6 +19,7 @@ struct Ray{
 public:
 	Vec3f origin;
 	Vec3f direction;
+	Vec3f inv_dir;
 	RayType raytype;
 	//----------Ray variables to be filled------
 };

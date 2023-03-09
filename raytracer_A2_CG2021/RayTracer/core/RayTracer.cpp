@@ -71,6 +71,7 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 		Ray shadowRay;
 		shadowRay.origin = light->position;
 		shadowRay.direction = light_dir;
+		shadowRay.inv_dir = 1.f / light_dir;
 		shadowRay.raytype = SHADOW;
 		Hit shadowHit = scene->intersect(shadowRay);
 		if(shadowHit.hasHit && !checkTwoPoints(shadowHit.point, hit.point)){
@@ -105,7 +106,8 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 			Vec3f ray_dir = (hit.point - ray.origin).normalize();
 			Vec3f reflect_dir = (ray_dir - (2.f * ray_dir.dotProduct(normal) * normal)).normalize();
 			Ray reflect_ray;
-			reflect_ray.direction = reflect_dir.normalize();
+			reflect_ray.direction = reflect_dir;
+			reflect_ray.inv_dir = 1.f/reflect_dir;
 			reflect_ray.origin = hit.point;
 			reflect_ray.raytype = SECONDARY;
 			Hit reflect_hit = scene->intersect(reflect_ray);

@@ -56,7 +56,7 @@ namespace rt{
             }
             
             // Split again by y if all shapes have same x
-            if(left_most == right_most){
+            if(left_most->getCenter().x == right_most->getCenter().x){
                 for(auto it = shapes.begin(); it != shapes.end(); ++it){
                     Shape* currShape = *it;
                     if(currShape->getCenter().y < left_most->getCenter().y){
@@ -68,8 +68,8 @@ namespace rt{
                 }
             }
 
-            // In the worst case that all shapes has same x and y, split again by z
-            if(left_most == right_most){
+            // If all shapes has same x and y, split again by z
+            if(left_most->getCenter().y == right_most->getCenter().y){
                 for(auto it = shapes.begin(); it != shapes.end(); ++it){
                     Shape* currShape = *it;
                     if(currShape->getCenter().z < left_most->getCenter().z){
@@ -79,6 +79,11 @@ namespace rt{
                         right_most = currShape;
                     }
                 }
+            }
+
+            // In the worst case that two shapes have the same center, let right be next
+            if(left_most->getCenter().z == right_most->getCenter().z){
+                right_most = shapes.at(1);
             }
 
             left.push_back(left_most);
@@ -97,7 +102,7 @@ namespace rt{
                     right.push_back(currShape);
                     continue;
                 }
-                if (right.size() >= l){
+                if(right.size() >= l){
                     left.push_back(currShape);
                     continue;
                 }
@@ -183,26 +188,18 @@ namespace rt{
             left = BVH::getIntersect(ray, leftNode);
             right = BVH::getIntersect(ray, rightNode);
         }else if(node->left){       
-            if(node->left){                
-            }else{
-                return hit;
-            }
             leftNode = node->left;
             left = BVH::getIntersect(ray,leftNode);
-            if(left.hasHit && left.hasHit == false){
+            if(!left.hasHit){
                 return hit;
             }
             float dis_left = (left.point - ray.origin).length();
             if(dis_left <= 1e-3) return hit;
             return left;
         }else if(node->right){
-            if(node->right){                
-            }else{
-                return hit;
-            }
             rightNode = node->right;
             right = BVH::getIntersect(ray,rightNode);
-            if(right.hasHit && right.hasHit == false){
+            if(!right.hasHit){
                 return hit;
             }
             float dis_right = (right.point - ray.origin).length();
@@ -213,21 +210,24 @@ namespace rt{
         }
         
 
-        if(left.hasHit == false && right.hasHit == false){
+        if(!left.hasHit && !right.hasHit){
             return hit;
         }
-        else if(left.hasHit == false){
+        else if(!left.hasHit){
             float dis_right = (right.point - ray.origin).length();
             if(dis_right <= 1e-3) return hit;
             return right;
         }
-        else if(right.hasHit == false){
+        else if(!right.hasHit){
             float dis_left = (left.point - ray.origin).length();
             if(dis_left <= 1e-3) return hit;
             return left;
         }else{
             float dis_left = (left.point - ray.origin).length();
             float dis_right = (right.point - ray.origin).length();
+            if(dis_left <= 1e-3 && dis_right <=1e-3){
+                return hit;
+            }
             if(dis_left <= 1e-3) return right;
             if(dis_right <= 1e-3) return left;
             if(dis_left < dis_right){
@@ -241,16 +241,14 @@ namespace rt{
 
     bool BVH::checkBounding(Ray ray, BoundingBox box)
     {   
-        Vec3f inv_dir = 1.f / ray.direction;
-
-        Vec3f t_min = (box.min - ray.origin) * inv_dir;
-        Vec3f t_max = (box.max - ray.origin) * inv_dir;
-        float t_enter_x = (inv_dir.x >= 0) ? t_min.x : t_max.x;
-        float t_enter_y = (inv_dir.y >= 0) ? t_min.y : t_max.y;
-        float t_enter_z = (inv_dir.z >= 0) ? t_min.z : t_max.z;
-        float t_exit_x = (inv_dir.x >= 0) ? t_max.x : t_min.x;
-        float t_exit_y = (inv_dir.y >= 0) ? t_max.y : t_min.y;
-        float t_exit_z = (inv_dir.z >= 0) ? t_max.z : t_min.z;
+        Vec3f t_min = (box.min - ray.origin) * ray.inv_dir;
+        Vec3f t_max = (box.max - ray.origin) * ray.inv_dir;
+        float t_enter_x = (ray.inv_dir.x >= 0) ? t_min.x : t_max.x;
+        float t_enter_y = (ray.inv_dir.y >= 0) ? t_min.y : t_max.y;
+        float t_enter_z = (ray.inv_dir.z >= 0) ? t_min.z : t_max.z;
+        float t_exit_x = (ray.inv_dir.x >= 0) ? t_max.x : t_min.x;
+        float t_exit_y = (ray.inv_dir.y >= 0) ? t_max.y : t_min.y;
+        float t_exit_z = (ray.inv_dir.z >= 0) ? t_max.z : t_min.z;
 
         float t_enter = std::max(std::max(t_enter_x, t_enter_y),t_enter_z);
         float t_exit = std::min(std::min(t_exit_x, t_exit_y),t_exit_z);
