@@ -40,9 +40,11 @@ namespace rt{
             left.push_back(shapes.at(0));
             right.push_back(shapes.at(1));
         }else{ 
-            //find the left most shape and right most shape;
+            // Find the left most shape and right most shape;
             Shape* left_most = shapes.at(0);
             Shape* right_most = shapes.at(0);
+
+            // Try splitting by x
             for(auto it = shapes.begin(); it != shapes.end(); ++it){
                 Shape* currShape = *it;
                 if(currShape->getCenter().x < left_most->getCenter().x){
@@ -52,6 +54,33 @@ namespace rt{
                     right_most = currShape;
                 }
             }
+            
+            // Split again by y if all shapes have same x
+            if(left_most == right_most){
+                for(auto it = shapes.begin(); it != shapes.end(); ++it){
+                    Shape* currShape = *it;
+                    if(currShape->getCenter().y < left_most->getCenter().y){
+                        left_most = currShape;
+                    }
+                    if(currShape->getCenter().y > right_most->getCenter().y){
+                        right_most = currShape;
+                    }
+                }
+            }
+
+            // In the worst case that all shapes has same x and y, split again by z
+            if(left_most == right_most){
+                for(auto it = shapes.begin(); it != shapes.end(); ++it){
+                    Shape* currShape = *it;
+                    if(currShape->getCenter().z < left_most->getCenter().z){
+                        left_most = currShape;
+                    }
+                    if(currShape->getCenter().z > right_most->getCenter().z){
+                        right_most = currShape;
+                    }
+                }
+            }
+
             left.push_back(left_most);
             right.push_back(right_most);
             int l = shapes.size() / 2;
@@ -82,17 +111,6 @@ namespace rt{
                 } 
             }
         }
-
-
-        
-        
-        // for(auto it = shapes.begin(); it != shapes.end(); ++it){
-        //     if(std::distance(it, middleItr) > 0){
-        //         left.push_back(*it);
-        //     }else{
-        //         right.push_back(*it);
-        //     }
-        // }
         
         BVHNode* leftNode = BVH::BuildBVHTree(left);
         BVHNode* rightNode = BVH::BuildBVHTree(right);
