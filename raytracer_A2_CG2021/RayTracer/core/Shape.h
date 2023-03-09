@@ -35,10 +35,11 @@ public:
 	// Shape abstract methods (to be implemented by subclasses)
 	//
 	virtual Hit intersect(Ray)=0;
-
-
+	Vec3f min;
+	Vec3f max;
 protected:
 	Material *material;
+	std::string shapeType;
 
 };
 

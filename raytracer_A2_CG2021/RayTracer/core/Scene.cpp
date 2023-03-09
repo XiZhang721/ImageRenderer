@@ -38,32 +38,37 @@ void Scene::createScene(Value& scenespecs){
 			shapes.push_back(Shape::createShape((Value&) shapesFromJson[i]));
 		}
 	}
-
+	this->bvh  = new BVH(shapes);
 }
 
 Hit Scene::intersect(Ray ray){
-	Hit hit;
-	hit.hasHit = false;
-	double rayDistance = INFINITY;
-	for (Shape *shape : shapes){
-		Hit h = shape -> intersect(ray);
-		if(h.hasHit){
-			float distance = (h.point - ray.origin).length();
-			if(distance <= 1e-3){
-				continue;
-			}
-			if(distance < rayDistance){
-				rayDistance = distance;
-				hit.point = h.point;
-				hit.material = h.material;
-				hit.normal = h.normal;
-				hit.hasHit = true;
-				hit.u = h.u;
-				hit.v = h.v;
-			}
-		}
-	}
-	return hit;
+
+	// Use the standard ray hit
+	// Hit hit;
+	// hit.hasHit = false;
+	// double rayDistance = INFINITY;
+	// for (Shape *shape : shapes){
+	// 	Hit h = shape -> intersect(ray);
+	// 	if(h.hasHit){
+	// 		float distance = (h.point - ray.origin).length();
+	// 		if(distance <= 1e-3){
+	// 			continue;
+	// 		}
+	// 		if(distance < rayDistance){
+	// 			rayDistance = distance;
+	// 			hit.point = h.point;
+	// 			hit.material = h.material;
+	// 			hit.normal = h.normal;
+	// 			hit.hasHit = true;
+	// 			hit.u = h.u;
+	// 			hit.v = h.v;
+	// 		}
+	// 	}
+	// }
+	// return hit;
+
+	//Using BVH for ray hit
+	return bvh->intersect(ray);
 }
 
 

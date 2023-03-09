@@ -165,6 +165,7 @@ CMakeFiles/raytracer.dir/core/RayTracer.cpp.o: ../parsers/rapidjson/msinttypes/s
 CMakeFiles/raytracer.dir/core/RayTracer.cpp.o: ../parsers/rapidjson/rapidjson.h
 CMakeFiles/raytracer.dir/core/RayTracer.cpp.o: ../parsers/rapidjson/reader.h
 CMakeFiles/raytracer.dir/core/RayTracer.cpp.o: ../parsers/rapidjson/stream.h
+CMakeFiles/raytracer.dir/core/RayTracer.cpp.o: ../shapes/BVH.h
 CMakeFiles/raytracer.dir/core/RayTracer.cpp.o: ../shapes/Sphere.h
 CMakeFiles/raytracer.dir/core/RayTracer.cpp.o: ../core/Material.h
 CMakeFiles/raytracer.dir/core/RayTracer.cpp.o: ../core/RayHitStructs.h
@@ -197,6 +198,7 @@ CMakeFiles/raytracer.dir/core/Scene.cpp.o: ../parsers/rapidjson/msinttypes/stdin
 CMakeFiles/raytracer.dir/core/Scene.cpp.o: ../parsers/rapidjson/rapidjson.h
 CMakeFiles/raytracer.dir/core/Scene.cpp.o: ../parsers/rapidjson/reader.h
 CMakeFiles/raytracer.dir/core/Scene.cpp.o: ../parsers/rapidjson/stream.h
+CMakeFiles/raytracer.dir/core/Scene.cpp.o: ../shapes/BVH.h
 CMakeFiles/raytracer.dir/core/Scene.cpp.o: ../shapes/Plane.h
 CMakeFiles/raytracer.dir/core/Scene.cpp.o: ../shapes/Sphere.h
 CMakeFiles/raytracer.dir/core/Scene.cpp.o: ../core/Material.h
@@ -317,6 +319,7 @@ CMakeFiles/raytracer.dir/main/main.cpp.o: ../parsers/rapidjson/msinttypes/stdint
 CMakeFiles/raytracer.dir/main/main.cpp.o: ../parsers/rapidjson/rapidjson.h
 CMakeFiles/raytracer.dir/main/main.cpp.o: ../parsers/rapidjson/reader.h
 CMakeFiles/raytracer.dir/main/main.cpp.o: ../parsers/rapidjson/stream.h
+CMakeFiles/raytracer.dir/main/main.cpp.o: ../shapes/BVH.h
 CMakeFiles/raytracer.dir/main/main.cpp.o: ../main/main.cpp
 
 CMakeFiles/raytracer.dir/materials/BlinnPhong.cpp.o: ../core/Material.h
@@ -372,6 +375,9 @@ CMakeFiles/raytracer.dir/shapes/BVH.cpp.o: ../parsers/rapidjson/reader.h
 CMakeFiles/raytracer.dir/shapes/BVH.cpp.o: ../parsers/rapidjson/stream.h
 CMakeFiles/raytracer.dir/shapes/BVH.cpp.o: ../shapes/BVH.cpp
 CMakeFiles/raytracer.dir/shapes/BVH.cpp.o: ../shapes/BVH.h
+CMakeFiles/raytracer.dir/shapes/BVH.cpp.o: ../shapes/Plane.h
+CMakeFiles/raytracer.dir/shapes/BVH.cpp.o: ../shapes/Sphere.h
+CMakeFiles/raytracer.dir/shapes/BVH.cpp.o: ../shapes/Triangle.h
 
 CMakeFiles/raytracer.dir/shapes/Plane.cpp.o: ../core/Material.h
 CMakeFiles/raytracer.dir/shapes/Plane.cpp.o: ../core/RayHitStructs.h

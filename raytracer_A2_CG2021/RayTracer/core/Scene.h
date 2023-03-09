@@ -12,6 +12,7 @@
 #include "math/geometry.h"
 #include "core/LightSource.h"
 #include "core/Shape.h"
+#include "shapes/BVH.h"
 
 
 using namespace rapidjson;
@@ -36,7 +37,7 @@ private:
 
 	std::vector<LightSource*> lightSources;
 	std::vector<Shape*> shapes;
-
+	BVH* bvh;
 };
 
 } //namespace rt

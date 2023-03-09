@@ -77,6 +77,8 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 			continue;
 		}
 		Vec3f normal = -shadowHit.normal.normalize();
+
+		// Diffuse
 		float diffuse_intensity = std::max(0.f,light_dir.dotProduct(normal));
 		if(material->tPath.size() > 0){
 			int x = hit.u * material->tWidth;
@@ -90,20 +92,14 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 		}else{
 			Id = Id + material->kd * light->id * diffuse_intensity * attenuation * material->diffusecolor;
 		}
-		
-
-
-
-		// Diffuse
-		
-		//color = color + material->diffusecolor * attenuation * diffuseDot;
-			
+					
 		// Specular
 		Vec3f view_dir = (ray.origin - hit.point).normalize();
 		Vec3f reflect_dir = (light_dir -(2.f * light_dir.dotProduct(normal) * normal)).normalize();
 		float specular_factor = std::pow(std::max(0.f, reflect_dir.dotProduct(view_dir)), material->specularexponent);
 		Is = Is + material->ks * specular_factor * light->is * Vec3f(1.f,1.f,1.f) * (attenuation / 10.f);
 
+		// Reflection
 		if(material->kr > 0.f && nbounces > 0){
 			Vec3f normal = hit.normal;
 			Vec3f ray_dir = (hit.point - ray.origin).normalize();
@@ -118,12 +114,7 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 				reflection = reflection +reflect_color * material->kr;
 			}
 		}
-
-
-
 	}
-
-
 
 	color = Ia + Id + Is + reflection;
 	return color;
