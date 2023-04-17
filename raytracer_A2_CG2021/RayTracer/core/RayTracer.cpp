@@ -28,17 +28,38 @@ Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 	int cameraWidth = camera->getWidth();
 	int cameraHeight = camera->getHeight();
 	Vec3f* pixelbuffer=new Vec3f[cameraWidth * cameraHeight];
-
-
-	//----------main rendering function to be filled------
-	for(int y = 0; y < cameraHeight; y++){
-		for(int x = 0; x < cameraWidth; x++){
-			Ray ray = camera->createRay(x, y, PRIMARY);
-			Vec3f hitColor = RayTracer::castRay(ray, scene, 0, nbounces);
-			pixelbuffer[y * cameraWidth + x] = hitColor;
-			//std::printf("Progress: %d\n",y* cameraWidth + column);
+	std::printf("CameraType: %d\n", camera->getType());
+	if(camera->getType() == 0){
+		//----------main rendering function to be filled------
+		for(int y = 0; y < cameraHeight; y++){
+			for(int x = 0; x < cameraWidth; x++){
+				Ray ray = camera->createRay(x, y, PRIMARY);
+				Vec3f hitColor = RayTracer::castRay(ray, scene, 0, nbounces);
+				pixelbuffer[y * cameraWidth + x] = hitColor;
+				//std::printf("Progress: %d\n",y* cameraWidth + column);
+			}
+		}
+	}else{
+		int sampleNumber = 40;
+		for(int y = 0; y < cameraHeight; y++){
+			for(int x = 0; x < cameraWidth; x++){
+				Vec3f colorSum = Vec3f(0.f,0.f,0.f);
+				for(int z = 0; z < sampleNumber; z++){
+					Ray ray = camera->createRay(x, y, PRIMARY);
+					Vec3f hitColor = RayTracer::castRay(ray, scene, 0, nbounces);
+					colorSum = colorSum + hitColor;
+				}
+				float pixelX = colorSum.x / (float)sampleNumber;
+				float pixelY = colorSum.y / (float)sampleNumber;
+				float pixelZ = colorSum.z / (float)sampleNumber;
+				Vec3f pixelColor = Vec3f(pixelX, pixelY, pixelZ);
+				pixelbuffer[y * cameraWidth + x] = pixelColor;
+				//std::printf("Progress: %d\n",y* cameraWidth + column);
+			}
 		}
 	}
+	
+
 
 
 

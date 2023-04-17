@@ -44,31 +44,31 @@ void Scene::createScene(Value& scenespecs){
 Hit Scene::intersect(Ray ray){
 
 	// Use the standard ray hit
-	Hit hit;
-	hit.hasHit = false;
-	double rayDistance = INFINITY;
-	for (Shape *shape : shapes){
-		Hit h = shape -> intersect(ray);
-		if(h.hasHit){
-			float distance = (h.point - ray.origin).length();
-			if(distance <= 1e-3){
-				continue;
-			}
-			if(distance < rayDistance){
-				rayDistance = distance;
-				hit.point = h.point;
-				hit.material = h.material;
-				hit.normal = h.normal;
-				hit.hasHit = true;
-				hit.u = h.u;
-				hit.v = h.v;
-			}
-		}
-	}
-	return hit;
+	// Hit hit;
+	// hit.hasHit = false;
+	// double rayDistance = INFINITY;
+	// for (Shape *shape : shapes){
+	// 	Hit h = shape -> intersect(ray);
+	// 	if(h.hasHit){
+	// 		float distance = (h.point - ray.origin).length();
+	// 		if(distance <= 1e-3){
+	// 			continue;
+	// 		}
+	// 		if(distance < rayDistance){
+	// 			rayDistance = distance;
+	// 			hit.point = h.point;
+	// 			hit.material = h.material;
+	// 			hit.normal = h.normal;
+	// 			hit.hasHit = true;
+	// 			hit.u = h.u;
+	// 			hit.v = h.v;
+	// 		}
+	// 	}
+	// }
+	// return hit;
 
 	//Using BVH for ray hit
-	//return bvh->intersect(ray);
+	return bvh->intersect(ray);
 }
 
 

@@ -22,7 +22,7 @@ public:
 	// Constructors
 	//
 	Camera(){};
-	Camera(int height, int width, int fov, Vec3f position, Vec3f lookat, Vec3f up):height(height), width(width), fov(fov), position(position), lookat(lookat), up(up){
+	Camera(int height, int width, int fov, Vec3f position, Vec3f lookat, Vec3f up, int camera_type):height(height), width(width), fov(fov), position(position), lookat(lookat), up(up), camera_type(camera_type){
 		//setCameraToWorld();
 	};
 
@@ -76,6 +76,10 @@ public:
 		this->width = width;
 	}
 
+	int getType() const {
+		return camera_type;
+	}
+
 
 
 protected:
@@ -90,6 +94,7 @@ protected:
 	Vec3f lookat;
 	Vec3f up;
 	//Matrix44f cameraToWorld;
+	int camera_type;
 
 };
 

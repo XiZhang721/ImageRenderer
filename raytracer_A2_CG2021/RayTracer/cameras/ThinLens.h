@@ -7,7 +7,7 @@
 #define THINLENS_H_
 
 #include "core/Camera.h"
-
+#include "core/RayHitStructs.h"
 
 namespace rt{
 
@@ -17,9 +17,10 @@ public:
 	//
 	// Constructors
 	//
-	ThinLens():Camera(){};
-	ThinLens(int width, int height, int fov, Vec3f position, Vec3f lookat, Vec3f up);
+	ThinLens();
+	ThinLens(int width, int height, int fov, Vec3f position, Vec3f lookat, Vec3f up, float aperturesize, float focusdistance);
 
+	Ray createRay(int x, int y, RayType type);
 	//
 	//Destructor
 	//
@@ -30,6 +31,14 @@ public:
 	//
 	void printCamera();
 
+private:
+	Vec3f camera_right;
+	Vec3f new_up;
+	float aperture_size;
+	float focus_distance;
+	float aspect_ratio;
+	float half_fov_tan;
+	float pixel_size;
 };
 
 

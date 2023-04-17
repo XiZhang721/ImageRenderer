@@ -82,7 +82,7 @@ namespace rt{
             }
 
             // In the worst case that two shapes have the same center, let right be next
-            if(left_most->getCenter().z == right_most->getCenter().z){
+            if(left_most->getCenter() == right_most->getCenter()){
                 right_most = shapes.at(1);
             }
 
@@ -161,23 +161,24 @@ namespace rt{
         if(node == nullptr){
             return hit;
         }       
-        if(node->isEmpty == true){
+        if(node->isEmpty){
             return hit;
         }
 
+        if(!checkBounding(ray, node->box)){
+            return hit;
+        }
         // Return the hit if bottom leaf node
-        if(node->hasShape == true){
+        if(node->hasShape){
             Shape* shape = node->shape;
             Hit shapeHit = shape->intersect(ray);
-            if(shapeHit.hasHit == false){
+            if(!shapeHit.hasHit){
                 return hit;
             }else{
                 return shapeHit;
             }
         }
-        if(!checkBounding(ray, node->box)){
-            return hit;
-        }
+
         BVHNode* leftNode;
         BVHNode* rightNode;
         Hit left;
