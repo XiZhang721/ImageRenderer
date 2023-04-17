@@ -42,7 +42,8 @@ Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 					Vec3f hitColor = RayTracer::castRay(ray, scene, 0, nbounces);
 					int pixelIndex = y * cameraWidth + x;
 					pixelbuffer[pixelIndex] = hitColor;
-					//std::printf("Progress: %d\n",pixelIndex / totalPixel);
+					
+					// progress printing
 					if(((float)pixelIndex / (float)totalPixel) * 100.f > (float)progress){
 						progress += 1;
 						std::printf("Progress: %d%%\n",progress);
@@ -60,6 +61,8 @@ Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 					float jitterSquare = (float)(jitterNumber * jitterNumber);
 					int pixelIndex = y * cameraWidth + x;
 					pixelbuffer[pixelIndex] = pixelColor / jitterSquare;
+
+					// progress printing
 					if(((float)pixelIndex / (float)totalPixel) * 100.f > (float)progress){
 						progress += 1;
 						std::printf("Progress: %d%%\n",progress);
@@ -95,6 +98,8 @@ Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 				}
 				int pixelIndex = y * cameraWidth + x;
 				pixelbuffer[pixelIndex] = colorSum / (float) sampleNumber;
+
+				// progress printing
 				if(((float)pixelIndex / (float)totalPixel) * 100.f > (float)progress){
 					progress += 1;
 					std::printf("Progress: %d%%\n",progress);
