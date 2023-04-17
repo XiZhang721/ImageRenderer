@@ -27,34 +27,78 @@ namespace rt{
 Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 	int cameraWidth = camera->getWidth();
 	int cameraHeight = camera->getHeight();
+	int totalPixel = cameraWidth * cameraHeight;
 	Vec3f* pixelbuffer=new Vec3f[cameraWidth * cameraHeight];
 	std::printf("CameraType: %d\n", camera->getType());
+	int jitterNumber = 5;
+	int progress = 0;
 	if(camera->getType() == 0){
-		//----------main rendering function to be filled------
+		//----------phinhole camera------
 		for(int y = 0; y < cameraHeight; y++){
 			for(int x = 0; x < cameraWidth; x++){
-				Ray ray = camera->createRay(x, y, PRIMARY);
-				Vec3f hitColor = RayTracer::castRay(ray, scene, 0, nbounces);
-				pixelbuffer[y * cameraWidth + x] = hitColor;
-				//std::printf("Progress: %d\n",y* cameraWidth + column);
+				if(jitterNumber <= 0){
+					// no camera jittering
+					Ray ray = camera->createRay(x, y, PRIMARY,0,0,0);
+					Vec3f hitColor = RayTracer::castRay(ray, scene, 0, nbounces);
+					int pixelIndex = y * cameraWidth + x;
+					pixelbuffer[pixelIndex] = hitColor;
+					//std::printf("Progress: %d\n",pixelIndex / totalPixel);
+					if(((float)pixelIndex / (float)totalPixel) * 100.f > (float)progress){
+						progress += 1;
+						std::printf("Progress: %d%%\n",progress);
+					}
+				}else{
+					// camera jittering
+					Vec3f pixelColor = Vec3f(0.f,0.f,0.f);
+					for(int sampleY = 0; sampleY < jitterNumber; sampleY ++){
+						for(int sampleX = 0; sampleX < jitterNumber; sampleX ++){
+							Ray ray = camera->createRay(x,y,PRIMARY, sampleX, sampleY, jitterNumber);
+							Vec3f hitColor = RayTracer::castRay(ray, scene, 0, nbounces);
+							pixelColor = pixelColor + hitColor;
+						}
+					}
+					float jitterSquare = (float)(jitterNumber * jitterNumber);
+					int pixelIndex = y * cameraWidth + x;
+					pixelbuffer[pixelIndex] = pixelColor / jitterSquare;
+					if(((float)pixelIndex / (float)totalPixel) * 100.f > (float)progress){
+						progress += 1;
+						std::printf("Progress: %d%%\n",progress);
+					}
+				}
 			}
 		}
 	}else{
-		int sampleNumber = 40;
+		//----------thin lens camera------
+		int sampleNumber = 5;
 		for(int y = 0; y < cameraHeight; y++){
 			for(int x = 0; x < cameraWidth; x++){
 				Vec3f colorSum = Vec3f(0.f,0.f,0.f);
 				for(int z = 0; z < sampleNumber; z++){
-					Ray ray = camera->createRay(x, y, PRIMARY);
-					Vec3f hitColor = RayTracer::castRay(ray, scene, 0, nbounces);
-					colorSum = colorSum + hitColor;
+					if(jitterNumber <= 0){
+						// no jittering
+						Ray ray = camera->createRay(x, y, PRIMARY,0,0,0);
+						Vec3f hitColor = RayTracer::castRay(ray, scene, 0, nbounces);
+						colorSum = colorSum + hitColor;
+					}else{
+						// with jittering
+						Vec3f jitterSum = Vec3f(0.f,0.f,0.f);
+						for(int sampleY = 0; sampleY < jitterNumber; sampleY ++){
+							for(int sampleX = 0; sampleX < jitterNumber; sampleX ++){
+								Ray ray = camera->createRay(x,y,PRIMARY, sampleX, sampleY, jitterNumber);
+								Vec3f hitColor = RayTracer::castRay(ray, scene, 0, nbounces);
+								jitterSum = jitterSum + hitColor;
+							}
+						}
+						float jitterSquare = (float)(jitterNumber * jitterNumber);
+						colorSum = colorSum + (jitterSum / jitterSquare);
+					}
 				}
-				float pixelX = colorSum.x / (float)sampleNumber;
-				float pixelY = colorSum.y / (float)sampleNumber;
-				float pixelZ = colorSum.z / (float)sampleNumber;
-				Vec3f pixelColor = Vec3f(pixelX, pixelY, pixelZ);
-				pixelbuffer[y * cameraWidth + x] = pixelColor;
-				//std::printf("Progress: %d\n",y* cameraWidth + column);
+				int pixelIndex = y * cameraWidth + x;
+				pixelbuffer[pixelIndex] = colorSum / (float) sampleNumber;
+				if(((float)pixelIndex / (float)totalPixel) * 100.f > (float)progress){
+					progress += 1;
+					std::printf("Progress: %d%%\n",progress);
+				}
 			}
 		}
 	}

@@ -21,10 +21,22 @@ namespace rt{
 
 	}
 
-	Ray Pinhole::createRay(int x, int y, RayType type){
+	Ray Pinhole::createRay(int x, int y, RayType type, int sampleX, int sampleY, int numSamples){
 		Ray ray;
-		float u = (float)x / (float)this->width - 0.5f;
-		float v = ((float)y / (float)this->height - 0.5f) / this->aspect_ratio;
+		float u, v;
+		if(numSamples <= 0){
+			// no jittering
+			u = (float)x / (float)this->width - 0.5f;
+			v = ((float)y / (float)this->height - 0.5f) / this->aspect_ratio;
+		}else{
+			// with jittering
+			float jitterX = static_cast<float>(std::rand())/ static_cast<float>(RAND_MAX);
+			float jitterY = static_cast<float>(std::rand())/ static_cast<float>(RAND_MAX);
+			float subPixelWidth = 1.f / (float) numSamples;
+			u = ((float)x + (sampleX + jitterX) * subPixelWidth) / (float)this->width - 0.5f;
+			v = (((float)y + (sampleY + jitterY) * subPixelWidth) / (float)this->height - 0.5f) / this->aspect_ratio;
+		}
+		
 		Vec3f ray_dir = (this->lookat + u * this->camera_right * pixel_size - v * this->new_up * pixel_size).normalize();
 		ray.origin = this->position;
 		ray.inv_dir = 1.f / ray_dir;

@@ -26,21 +26,23 @@ namespace rt{
 		this->pixel_size = 2.f * half_fov_tan;
 	}
 
-    Ray ThinLens::createRay(int x, int y, RayType type)
+    Ray ThinLens::createRay(int x, int y, RayType type, int sampleX, int sampleY, int numSamples)
     {
         Ray ray;
-		float u = (float)x / (float)this->width - 0.5f;
-		float v = ((float)y / (float)this->height - 0.5f) / this->aspect_ratio;
-
-		// std::random_device rd;
-		// std::mt19937 gen(rd());
-		// std::uniform_real_distribution<> dist(-1.0, 1.0);
-		// float r1, r2;
-		// do{
-		// 	r1 = dist(gen);
-		// 	r2 = dist(gen);
-		// }while (r1 * r1 + r2 * r2 > 1.f);
-		//Vec3f lens_point = this->aperture_size * (r1 * this->camera_right + r2 * this->new_up) * 0.5f;
+		float u, v;
+		if(numSamples <= 0){
+			// no jittering
+			u = (float)x / (float)this->width - 0.5f;
+			v = ((float)y / (float)this->height - 0.5f) / this->aspect_ratio;
+		}else{
+			// with jittering
+			float jitterX = static_cast<float>(std::rand())/ static_cast<float>(RAND_MAX);
+			float jitterY = static_cast<float>(std::rand())/ static_cast<float>(RAND_MAX);
+			float subPixelWidth = 1.f / (float) numSamples;
+			u = ((float)x + (sampleX + jitterX) * subPixelWidth) / (float)this->width - 0.5f;
+			v = (((float)y + (sampleY + jitterY) * subPixelWidth) / (float)this->height - 0.5f) / this->aspect_ratio;
+		}
+		
 		float r1 = static_cast<float>(std::rand())/ static_cast<float>(RAND_MAX);
 		float r2 = static_cast<float>(std::rand())/ static_cast<float>(RAND_MAX);
 		float angle = 2.f * M_PI * r1;
