@@ -15,7 +15,7 @@ namespace rt{
         Vec3f e2 = v2 - v0;
         Vec3f pvec = ray.direction.crossProduct(e2);
         float det = e1.dotProduct(pvec);
-        if(abs(det) < 1e-3){
+        if(abs(det) < 0){
             hit.hasHit = false;
             return hit;
         }
