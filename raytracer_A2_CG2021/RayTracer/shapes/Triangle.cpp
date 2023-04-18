@@ -44,14 +44,36 @@ namespace rt{
         hit.hasHit = true;
         hit.point = intersection;
         hit.material = material;
-        hit.normal = e1.crossProduct(e2).normalize();
+
+        // Barycentric coordinate
+        Vec3f p0 = intersection - v0;
+        Vec3f p1 = intersection - v1;
+        Vec3f p2 = intersection - v2;
+
+        float denominator = e1.crossProduct(e2).length();
+        float alpha = p1.crossProduct(p2).length() / denominator;
+        float beta = p2.crossProduct(p0).length() / denominator;
+        float gamma = 1 - alpha - beta;
+
+        if(this->hasNormal){
+            hit.normal = (n0 * alpha + n1 * beta + n2 * gamma).normalize();
+        }else{
+            hit.normal = e1.crossProduct(e2).normalize();
+        }
+        
         if(u > 0){
             u = -u;
             v = -v;
         }
+        if(this->hasUV){
+            Vec2f uv = uv0 * alpha + uv1 * beta + uv2 * gamma;
+            hit.u = uv.x;
+            hit.v = uv.y;
+        }else{
+            hit.u = v;
+            hit.v = u;            
+        }
 
-        hit.u = v;
-        hit.v = u;
         return hit;
 
 

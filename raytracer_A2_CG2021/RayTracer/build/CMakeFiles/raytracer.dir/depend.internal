@@ -212,6 +212,7 @@ CMakeFiles/raytracer.dir/core/Shape.cpp.o
  ../core/Shape.h
  ../materials/BlinnPhong.h
  ../math/geometry.h
+ ../parsers/happly.h
  ../parsers/rapidjson/allocators.h
  ../parsers/rapidjson/document.h
  ../parsers/rapidjson/encodedstream.h
@@ -232,8 +233,10 @@ CMakeFiles/raytracer.dir/core/Shape.cpp.o
  ../parsers/rapidjson/rapidjson.h
  ../parsers/rapidjson/reader.h
  ../parsers/rapidjson/stream.h
+ ../shapes/BVH.h
  ../shapes/Plane.h
  ../shapes/Sphere.h
+ ../shapes/TriMesh.h
  ../shapes/Triangle.h
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Material.h
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/core/Shape.cpp
@@ -441,6 +444,7 @@ CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o
  ../core/Shape.h
  ../materials/BlinnPhong.h
  ../math/geometry.h
+ ../parsers/happly.h
  ../parsers/rapidjson/allocators.h
  ../parsers/rapidjson/document.h
  ../parsers/rapidjson/encodedstream.h
@@ -461,8 +465,10 @@ CMakeFiles/raytracer.dir/shapes/TriMesh.cpp.o
  ../parsers/rapidjson/rapidjson.h
  ../parsers/rapidjson/reader.h
  ../parsers/rapidjson/stream.h
+ /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/BVH.h
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/TriMesh.cpp
  /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/TriMesh.h
+ /home/xizhang/Desktop/CG-CW2/raytracer_A2_CG2021/RayTracer/shapes/Triangle.h
 CMakeFiles/raytracer.dir/shapes/Triangle.cpp.o
  ../core/Material.h
  ../core/RayHitStructs.h

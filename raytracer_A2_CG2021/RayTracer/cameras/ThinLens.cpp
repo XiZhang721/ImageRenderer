@@ -49,8 +49,8 @@ namespace rt{
 		float radius = sqrtf(r2) * this->aperture_size * 0.5f;
 		float offsetX = radius * cosf(angle);
 		float offsetY = radius * sinf(angle);
-		Vec3f lens_point = this->position + offsetX * this->camera_right + offsetY * this->new_up;
 
+		Vec3f lens_point = this->position + offsetX * this->camera_right + offsetY * this->new_up;
 		Vec3f ray_dir = (this->lookat + u * this->camera_right * pixel_size - v * this->new_up * pixel_size).normalize();
 		Vec3f focus_point = this->position  + ray_dir * this->focus_distance;
 

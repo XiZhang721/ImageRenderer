@@ -30,12 +30,16 @@ public:
 	virtual ~Shape();
 
 	static Shape* createShape(Value& shapeSpecs);
-
+	
 	//
 	// Shape abstract methods (to be implemented by subclasses)
 	//
 	virtual Hit intersect(Ray)=0;
 	virtual Vec3f getCenter()=0;
+
+	bool isMesh() const{
+		return shapeType == "mesh";
+	}
 	Vec3f min;
 	Vec3f max;	
 

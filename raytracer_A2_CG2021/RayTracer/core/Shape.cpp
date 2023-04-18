@@ -7,6 +7,7 @@
 #include "shapes/Sphere.h"
 #include "shapes/Plane.h"
 #include "shapes/Triangle.h"
+#include "shapes/TriMesh.h"
 #include "Material.h"
 
 
@@ -22,7 +23,7 @@ namespace rt{
         }
 
         std::string shapeType = shapeSpecs["type"].GetString();
-
+        std::printf("Loading shape: %s\n", shapeType.c_str());
         if(shapeType.compare("sphere") == 0){
             Vec3f center = {shapeSpecs["center"][0].GetFloat(),shapeSpecs["center"][1].GetFloat(),shapeSpecs["center"][2].GetFloat()};
             float radius = shapeSpecs["radius"].GetFloat();
@@ -41,6 +42,12 @@ namespace rt{
             Vec3f v2 = {shapeSpecs["v2"][0].GetFloat(),shapeSpecs["v2"][1].GetFloat(),shapeSpecs["v2"][2].GetFloat()};
             Material *material = Material::createMaterial((Value&) shapeSpecs["material"]);
             return new Triangle(v0,v1,v2,material);
+        }else if(shapeType.compare("mesh") == 0){
+            Vec3f position = {shapeSpecs["position"][0].GetFloat(),shapeSpecs["position"][1].GetFloat(),shapeSpecs["position"][2].GetFloat()};
+            float scale = shapeSpecs["scale"].GetFloat();
+            std::string path = shapeSpecs["path"].GetString();
+            Material *material = Material::createMaterial((Value&) shapeSpecs["material"]);
+            return new TriMesh(position,scale,path,material);
         }
         return nullptr;
     }

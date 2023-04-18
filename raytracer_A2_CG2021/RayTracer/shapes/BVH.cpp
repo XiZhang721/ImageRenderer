@@ -121,6 +121,7 @@ namespace rt{
         BVHNode* rightNode = BVH::BuildBVHTree(right);
         node->left = leftNode;
         node->right = rightNode;
+        // std::printf("BVH tree finished building.\n");
         if(leftNode->isEmpty == true && rightNode->isEmpty == true){
             return node;
         }
@@ -213,24 +214,28 @@ namespace rt{
 
         if(!left.hasHit && !right.hasHit){
             return hit;
-        }
-        else if(!left.hasHit){
+        }else if(!left.hasHit){
             float dis_right = (right.point - ray.origin).length();
             if(dis_right <= 1e-3) return hit;
             return right;
-        }
-        else if(!right.hasHit){
+        }else if(!right.hasHit){
             float dis_left = (left.point - ray.origin).length();
             if(dis_left <= 1e-3) return hit;
             return left;
         }else{
             float dis_left = (left.point - ray.origin).length();
             float dis_right = (right.point - ray.origin).length();
+
+            // prevent reflection ray hitting the origin object
             if(dis_left <= 1e-3 && dis_right <=1e-3){
                 return hit;
-            }
-            if(dis_left <= 1e-3) return right;
-            if(dis_right <= 1e-3) return left;
+            }else if(dis_left <= 1e-3){
+                return right;
+            }else if(dis_right <= 1e-3){
+                return left;
+            } 
+
+            // return the closer hit point
             if(dis_left < dis_right){
                 return left;
             }else{

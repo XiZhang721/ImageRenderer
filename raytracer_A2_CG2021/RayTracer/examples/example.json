@@ -98,6 +98,19 @@
             "tWidth": 500,
             "tHeight": 500
         }
+    },
+    {
+        "id": "triangle mesh",
+        "type": "mesh",
+        "position": [0.0, 2.7, 0.5],
+        "path": "../models/test.ply",
+        "scale": 0.15,
+        "material":{
+            "ks":0.4,
+            "kd":0.8,
+            "specularexponent":3,
+            "diffusecolor":[0.4, 0.3, 0.4]
+        }
     }
     ]
 }

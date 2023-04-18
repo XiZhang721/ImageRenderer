@@ -25,13 +25,17 @@ namespace rt{
  * @return a pixel buffer containing pixel values in linear RGB format
  */
 Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
+	// modify this for jitter sample number, 0 if no jittering
+	int jitterNumber = 0;
+
 	int cameraWidth = camera->getWidth();
 	int cameraHeight = camera->getHeight();
 	int totalPixel = cameraWidth * cameraHeight;
 	Vec3f* pixelbuffer=new Vec3f[cameraWidth * cameraHeight];
 	std::printf("CameraType: %d\n", camera->getType());
-	int jitterNumber = 5;
 	int progress = 0;
+	
+	// Start rendering
 	if(camera->getType() == 0){
 		//----------phinhole camera------
 		for(int y = 0; y < cameraHeight; y++){
@@ -107,11 +111,6 @@ Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 			}
 		}
 	}
-	
-
-
-
-
 
 	return pixelbuffer;
 
@@ -138,11 +137,13 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 		float distance = (hit.point - light->position).length();
 		Vec3f lightColor = Vec3f(1.f,1.f,1.f);
 		float attenuation = 1.f / (distance * distance * 10.f);
+
 		Ray shadowRay;
 		shadowRay.origin = light->position;
 		shadowRay.direction = light_dir;
 		shadowRay.inv_dir = 1.f / light_dir;
 		shadowRay.raytype = SHADOW;
+
 		Hit shadowHit = scene->intersect(shadowRay);
 		if(shadowHit.hasHit && !checkTwoPoints(shadowHit.point, hit.point)){
 			continue;
@@ -175,11 +176,13 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 			Vec3f normal = hit.normal;
 			Vec3f ray_dir = (hit.point - ray.origin).normalize();
 			Vec3f reflect_dir = (ray_dir - (2.f * ray_dir.dotProduct(normal) * normal)).normalize();
+
 			Ray reflect_ray;
 			reflect_ray.direction = reflect_dir;
 			reflect_ray.inv_dir = 1.f/reflect_dir;
 			reflect_ray.origin = hit.point;
 			reflect_ray.raytype = SECONDARY;
+			
 			Hit reflect_hit = scene->intersect(reflect_ray);
 			if(reflect_hit.hasHit){
 				Vec3f reflect_color = castRay(reflect_ray,scene,depth+1,nbounces);
@@ -212,7 +215,6 @@ Vec3f* RayTracer::tonemap(Vec3f* pixelbuffer, int cameraWidth, int cameraHeight)
 			pixel[j] = (float)std::min((int)pixel[j],255);
 		}
 		pixelbuffer[i] = pixel;
-		//std::printf("Progress: %d\n",i);
 	}
 
 	return pixelbuffer;

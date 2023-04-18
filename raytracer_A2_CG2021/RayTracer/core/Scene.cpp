@@ -35,9 +35,15 @@ void Scene::createScene(Value& scenespecs){
 	if(scenespecs.HasMember("shapes")){
 		const Value& shapesFromJson = scenespecs["shapes"];
 		for (int i = 0; i < shapesFromJson.Size(); i++){
-			shapes.push_back(Shape::createShape((Value&) shapesFromJson[i]));
+			Shape *currShape = Shape::createShape((Value&) shapesFromJson[i]);
+			if(!currShape->isMesh()){
+				shapes.push_back(currShape);
+			}else{
+				shapes.push_back(currShape);
+			}
 		}
 	}
+	std::printf("Scene creation finished.\n");
 	this->bvh  = new BVH(shapes);
 }
 
