@@ -26,7 +26,7 @@ namespace rt{
  */
 Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 	// modify this for jitter sample number, 0 if no jittering
-	int jitterNumber = 0;
+	int jitterNumber = 3;
 
 	int cameraWidth = camera->getWidth();
 	int cameraHeight = camera->getHeight();
