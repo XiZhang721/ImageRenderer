@@ -31,7 +31,7 @@ public:
 	//
 	virtual ~Camera();
 
-	virtual Ray createRay(int x, int y, RayType type, int sampleX, int sampleY, int numSamples) = 0;
+	virtual Ray createRay(int x, int y, RayType type, int sampleX, int sampleY, int xNum, int yNum) = 0;
 
 
 	//

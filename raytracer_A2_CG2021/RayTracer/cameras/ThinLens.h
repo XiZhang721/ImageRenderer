@@ -20,7 +20,7 @@ public:
 	ThinLens();
 	ThinLens(int width, int height, int fov, Vec3f position, Vec3f lookat, Vec3f up, int jittering, float aperturesize, float focusdistance);
 
-	Ray createRay(int x, int y, RayType type, int sampleX, int sampleY, int numSamples);
+	Ray createRay(int x, int y, RayType type, int sampleX, int sampleY, int xNum, int yNum);
 	//
 	//Destructor
 	//

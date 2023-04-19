@@ -43,7 +43,7 @@ void Scene::createScene(Value& scenespecs){
 			}
 		}
 	}
-	std::printf("Scene creation finished.\n");
+	std::printf("Scene creation finished\n");
 	this->bvh  = new BVH(shapes);
 }
 
