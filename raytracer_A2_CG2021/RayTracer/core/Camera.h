@@ -22,7 +22,7 @@ public:
 	// Constructors
 	//
 	Camera(){};
-	Camera(int height, int width, int fov, Vec3f position, Vec3f lookat, Vec3f up, int camera_type):height(height), width(width), fov(fov), position(position), lookat(lookat), up(up), camera_type(camera_type){
+	Camera(int height, int width, int fov, Vec3f position, Vec3f lookat, Vec3f up, int camera_type, int jittering):height(height), width(width), fov(fov), position(position), lookat(lookat), up(up), camera_type(camera_type), jittering(jittering){
 		//setCameraToWorld();
 	};
 
@@ -80,6 +80,10 @@ public:
 		return camera_type;
 	}
 
+	int getJittering() const{
+		return jittering;
+	}
+
 
 
 protected:
@@ -90,6 +94,7 @@ protected:
 	int height;
 	int width;
 	int fov; //field of view
+	int jittering;
 	Vec3f position;
 	Vec3f lookat;
 	Vec3f up;

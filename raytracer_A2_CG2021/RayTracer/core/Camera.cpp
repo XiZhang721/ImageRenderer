@@ -35,15 +35,19 @@ namespace rt{
 		int width = cameraSpecs["width"].GetInt();
 		int height = cameraSpecs["height"].GetInt();
 		int fov = cameraSpecs["fov"].GetInt();
+		int jittering = 0;
+		if(cameraSpecs.HasMember("jittering")){
+			jittering = cameraSpecs["jittering"].GetInt();
+		}
 		Vec3f position{cameraSpecs["position"][0].GetFloat(),cameraSpecs["position"][1].GetFloat(),cameraSpecs["position"][2].GetFloat()};
 		Vec3f lookat{cameraSpecs["lookat"][0].GetFloat(),cameraSpecs["lookat"][1].GetFloat(),cameraSpecs["lookat"][2].GetFloat()};
 		Vec3f up{cameraSpecs["up"][0].GetFloat(),cameraSpecs["up"][1].GetFloat(),cameraSpecs["up"][2].GetFloat()};
 	
 		//return camera object based on camera specs
 		if (cameraType.compare("pinhole")==0){
-			return new Pinhole(width, height, fov, position, lookat, up);
+			return new Pinhole(width, height, fov, position, lookat, up, jittering);
 		}else if (cameraType.compare("thinlens")==0){
-			return new ThinLens(width, height, fov, position, lookat, up,
+			return new ThinLens(width, height, fov, position, lookat, up, jittering,
 				cameraSpecs["aperturesize"].GetFloat(),
 				cameraSpecs["focusdistance"].GetFloat());
 		}

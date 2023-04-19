@@ -16,7 +16,7 @@ namespace rt{
 	//
 	// ThinLens constructor (example)
 	//
-	ThinLens::ThinLens(int width, int height, int fov,Vec3f position, Vec3f lookat, Vec3f up, float aperturesize, float focusdistance):Camera(width, height, fov, position, lookat, up, 1){
+	ThinLens::ThinLens(int width, int height, int fov,Vec3f position, Vec3f lookat, Vec3f up, int jittering, float aperturesize, float focusdistance):Camera(width, height, fov, position, lookat, up, 1, jittering){
 		this->aperture_size = aperturesize;
 		this->focus_distance = focusdistance;
 		this->camera_right = lookat.crossProduct(up).normalize();

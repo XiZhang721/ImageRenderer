@@ -9,11 +9,17 @@ namespace rt{
     Material* Material::createMaterial(Value& materialSpecs){
         float ks = materialSpecs["ks"].GetFloat();
         float kd = materialSpecs["kd"].GetFloat();
-        float kr;
+        float kr = -1.f;;
         if(materialSpecs.HasMember("kr")){
             kr = materialSpecs["kr"].GetFloat();
-        }else{
-            kr = -1.f;
+        }
+        float ka = 1.f;
+        if(materialSpecs.HasMember("ka")){
+            ka = materialSpecs["ka"].GetFloat();
+        }
+        float refractionIndex = 1.f;
+        if(materialSpecs.HasMember("refractionindex")){
+            refractionIndex = materialSpecs["refractionindex"].GetFloat();
         }
         int specularexponent = materialSpecs["specularexponent"].GetInt();
         Vec3f diffusecolor = {materialSpecs["diffusecolor"][0].GetFloat(),
@@ -27,7 +33,7 @@ namespace rt{
             tWidth = materialSpecs["tWidth"].GetInt();
             tHeight = materialSpecs["tHeight"].GetInt();
         }
-        return new BlinnPhong(ks,kd,kr,specularexponent,diffusecolor,tPath,tWidth,tHeight);
+        return new BlinnPhong(ks,kd,kr,ka,refractionIndex,specularexponent,diffusecolor,tPath,tWidth,tHeight);
         
     }
 

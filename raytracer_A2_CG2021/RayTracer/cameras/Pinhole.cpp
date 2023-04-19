@@ -12,7 +12,7 @@ namespace rt{
 	//
 	// Pinhole constructor (example)
 	//
-	Pinhole::Pinhole(int width, int height, int fov, Vec3f position, Vec3f lookat, Vec3f up):Camera(width, height, fov, position, lookat, up, 0){
+	Pinhole::Pinhole(int width, int height, int fov, Vec3f position, Vec3f lookat, Vec3f up, int jittering):Camera(width, height, fov, position, lookat, up, 0, jittering){
 		this->camera_right = lookat.crossProduct(up).normalize();
 		this->new_up = this->camera_right.crossProduct(lookat).normalize();
 		this->aspect_ratio = (float)width / (float)height;

@@ -17,12 +17,14 @@ class BlinnPhong: public Material{
 
 public:
     BlinnPhong();
-    BlinnPhong(float ks, float kd, float kr, int specularexponent, Vec3f diffusecolor, std::string tPath, int tWidth, int tHeight);
+    BlinnPhong(float ks, float kd, float kr, float ka, float refractionIndex, int specularexponent, Vec3f diffusecolor, std::string tPath, int tWidth, int tHeight);
 
     Vec3f GetDiffuseColor() const {return diffusecolor;};
     float ks;
     float kd;
     float kr;
+    float ka;
+    float refractionIndex;
     int specularexponent;
     Vec3f diffusecolor;
     std::string tPath;

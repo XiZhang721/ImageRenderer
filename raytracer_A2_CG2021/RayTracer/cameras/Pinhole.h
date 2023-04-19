@@ -19,7 +19,7 @@ public:
 	// Constructors
 	//
 	Pinhole();
-	Pinhole(int width, int height, int fov, Vec3f position, Vec3f lookat, Vec3f up);
+	Pinhole(int width, int height, int fov, Vec3f position, Vec3f lookat, Vec3f up, int jittering);
 
 	Ray createRay(int x, int y, RayType type, int sampleX, int sampleY, int numSamples);
 	//

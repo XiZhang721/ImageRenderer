@@ -11,11 +11,13 @@
 
 namespace rt{
 
-    BlinnPhong::BlinnPhong(float ks, float kd, float kr, int specularexponent, Vec3f diffusecolor, std::string tPath, int tWidth, int tHeight)
+    BlinnPhong::BlinnPhong(float ks, float kd, float kr, float ka, float refractionIndex, int specularexponent, Vec3f diffusecolor, std::string tPath, int tWidth, int tHeight)
     {
         this->ks = ks;
         this->kd = kd;
         this->kr = kr;
+        this->ka = ka;
+        this->refractionIndex = refractionIndex;
         this->specularexponent = specularexponent;
         this->diffusecolor = diffusecolor;
         this->tPath = tPath;

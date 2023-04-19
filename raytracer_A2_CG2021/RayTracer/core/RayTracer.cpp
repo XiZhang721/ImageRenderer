@@ -25,9 +25,7 @@ namespace rt{
  * @return a pixel buffer containing pixel values in linear RGB format
  */
 Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
-	// modify this for jitter sample number, 0 if no jittering
-	int jitterNumber = 3;
-
+	int jitterNumber = camera->getJittering();
 	int cameraWidth = camera->getWidth();
 	int cameraHeight = camera->getHeight();
 	int totalPixel = cameraWidth * cameraHeight;
@@ -128,8 +126,11 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 	Vec3f Ia = scene->backgroundColor;
 	Vec3f Id = Vec3f(0.f,0.f,0.f);
 	Vec3f Is = Vec3f(0.f,0.f,0.f);
+	Vec3f refraction = Vec3f(0.f,0.f,0.f);
 
 	BlinnPhong *material = (BlinnPhong *) hit.material;
+	float ka = material->ka;
+	float kt = 1.f - ka;
 	Vec3f color{};
 	Vec3f reflection = scene->backgroundColor;
 	for(LightSource *light : scene->getLightSources()){
@@ -170,13 +171,13 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 		Vec3f reflect_dir = (light_dir -(2.f * light_dir.dotProduct(normal) * normal)).normalize();
 		float specular_factor = std::pow(std::max(0.f, reflect_dir.dotProduct(view_dir)), material->specularexponent);
 		Is = Is + material->ks * specular_factor * light->is * Vec3f(1.f,1.f,1.f) * (attenuation / 10.f);
+		
 
 		// Reflection
 		if(material->kr > 0.f && nbounces > 0){
 			Vec3f normal = hit.normal;
 			Vec3f ray_dir = (hit.point - ray.origin).normalize();
 			Vec3f reflect_dir = (ray_dir - (2.f * ray_dir.dotProduct(normal) * normal)).normalize();
-
 			Ray reflect_ray;
 			reflect_ray.direction = reflect_dir;
 			reflect_ray.inv_dir = 1.f/reflect_dir;
@@ -189,9 +190,32 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 				reflection = reflection +reflect_color * material->kr;
 			}
 		}
+
+		if(kt > 0.f && nbounces > 0){
+			float ior = material->refractionIndex;
+			Vec3f normal = -hit.normal;
+			Vec3f ray_dir = ray.direction;
+
+			float cosI = -(normal.dotProduct(ray_dir));
+			float n = 1.f / ior;
+			float sinT2 = (n * n) * (1.f - cosI * cosI);
+			if(sinT2 <= 1.f){
+				float cosT = std::sqrt(1.f - sinT2);
+				Vec3f refract_dir = (n * ray_dir) + (n * cosI - cosT) * normal;
+				refract_dir = refract_dir.normalize();
+				Ray refract_ray;
+				refract_ray.direction = refract_dir;
+				refract_ray.inv_dir = 1.f / refract_dir;
+				refract_ray.origin = hit.point;
+				refract_ray.raytype = SECONDARY;
+				refraction = refraction + castRay(refract_ray, scene, depth + 1, nbounces);
+			}
+		}
+
+		
 	}
 
-	color = Ia + Id + Is + reflection;
+	color = (Ia + Id + Is + reflection) * ka + refraction * kt;
 	return color;
 }
 
