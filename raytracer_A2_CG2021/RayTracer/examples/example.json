@@ -5,7 +5,7 @@
     "width":800,
     "height":800,
     "fov":35,
-    "jittering":25,
+    "jittering":3,
     "position": [0.0, -3.5, 2.0],
     "lookat": [0.0, 1.0, -0.1],
     "up": [0.0, 0.0, 0.5]
@@ -21,20 +21,19 @@
     }
     ],
     "shapes":[
-    {
-        "type":"sphere",
-        "center": [0.0, 2.7, 0.15],
-        "radius":0.5,
-        "material":{
-            "ks":0.4,
-            "kd":0.8,
-            "specularexponent":3,
-            "diffusecolor":[0.4, 0.3, 0.4],
-            "tPath": "../textures/sky-map.jpg",
-            "tWidth": 850,
-            "tHeight": 480
-        }
-    },
+        {
+            "id": "triangle mesh",
+            "type": "mesh",
+            "position": [0.0, 2.7, 0.5],
+            "path": "../models/Propan.ply",
+            "scale": 0.75,
+            "material":{
+                "ks":0.4,
+                "kd":0.8,
+                "specularexponent":3,
+                "diffusecolor":[0.4, 0.3, 0.4]
+            }
+        },
     {
         "id": "back wall",
         "type": "plane",
