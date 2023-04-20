@@ -74,7 +74,7 @@ Hit Scene::intersect(Ray ray){
 	// return hit;
 
 	//Using BVH for ray hit
-	return bvh->intersect(ray);
+	return this->bvh->intersect(ray);
 }
 
 

@@ -28,11 +28,10 @@ public:
 	static Vec3f castRay(Ray ray, Scene* scene,int depth, int nbounces);
 private:
 	static bool checkTwoPoints(Vec3f p1, Vec3f p2){
-		bool isSame = true;
-		for(int i = 0; i < 3; i++){
-			isSame = isSame && abs(p1[i] - p2[i]) < 1e-3;
-		}
-		return isSame;
+		bool isXSame = abs(p1.x - p2.x) <= 1e-3f;
+		bool isYSame = abs(p1.y - p2.y) <= 1e-3f;
+		bool isZSame = abs(p1.z - p2.z) <= 1e-3f;
+		return isXSame && isYSame && isZSame;
 	}
 };
 

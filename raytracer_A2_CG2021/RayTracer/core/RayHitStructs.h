@@ -21,6 +21,7 @@ public:
 	Vec3f direction;
 	Vec3f inv_dir;
 	RayType raytype;
+	bool isInside = false;
 	//----------Ray variables to be filled------
 };
 

@@ -5,7 +5,7 @@
         "width":800,
         "height":800,
         "fov":35,
-        "jittering":9,
+        "jittering":25,
         "position": [0.0, -3.5, 2.0],
         "lookat": [0.0, 1.0, -0.1],
         "up": [0.0, 0.0, 0.5]
@@ -21,6 +21,22 @@
         }
         ],
         "shapes":[
+        {
+            "id": "triangle mesh",
+            "type": "mesh",
+            "position": [0.0, 4.7, 0.75],
+            "path": "../models/chair.ply",
+            "scale": 0.4,
+            "material":{
+                "ks":0.4,
+                "kd":0.8,
+                "specularexponent":3,
+                "diffusecolor":[0.4, 0.3, 0.4],
+                "tPath": "../textures/Wood.jpg",
+                "tWidth": 2048,
+                "tHeight": 2048
+            }
+        },
         {
             "type":"sphere",
             "center": [-0.75, 2.7, 0.15],
@@ -38,12 +54,12 @@
         {
             "type":"sphere",
             "center": [0.0, 4.7, 2.25],
-            "radius":0.5,
+            "radius":0.4,
             "material":{
                 "ks":0.4,
                 "kd":0.8,
                 "ka":0.2,
-                "refractionindex": 1.52,
+                "refractionindex": 1.54,
                 "specularexponent":3,
                 "diffusecolor":[0.3, 0.3, 0.3]
             }
@@ -52,14 +68,14 @@
             "id": "triangle mesh",
             "type": "mesh",
             "position": [0.75, 3.0, 0.0],
-            "path": "../models/test.ply",
+            "path": "../models/clock.ply",
             "scale": 0.25,
             "material":{
                 "ks":0.4,
                 "kd":0.8,
                 "specularexponent":3,
                 "diffusecolor":[0.4, 0.3, 0.4],
-                "tPath": "../textures/test.png",
+                "tPath": "../textures/clock.png",
                 "tWidth": 2048,
                 "tHeight": 2048
             }

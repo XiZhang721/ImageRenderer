@@ -80,7 +80,7 @@ Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 		}
 	}else{
 		//----------thin lens camera------
-		int sampleNumber = 5;
+		int sampleNumber = 3;
 		for(int y = 0; y < cameraHeight; y++){
 			for(int x = 0; x < cameraWidth; x++){
 				Vec3f colorSum = Vec3f(0.f,0.f,0.f);
@@ -140,7 +140,7 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 	Vec3f color{};
 	Vec3f reflection = scene->backgroundColor;
 	for(LightSource *light : scene->getLightSources()){
-		Vec3f light_dir = (hit.point-light->position).normalize();
+		Vec3f light_dir = (hit.point - light->position).normalize();
 		float distance = (hit.point - light->position).length();
 		Vec3f lightColor = Vec3f(1.f,1.f,1.f);
 		float attenuation = 1.f / (distance * distance * 10.f);
@@ -197,31 +197,41 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 			}
 		}
 
+		// refraction
 		if(kt > 0.f && nbounces > 0){
-			float ior = material->refractionIndex;
-			Vec3f normal = -hit.normal;
-			Vec3f ray_dir = ray.direction;
-
-			float cosI = -(normal.dotProduct(ray_dir));
-			float n = 1.f / ior;
-			float sinT2 = (n * n) * (1.f - cosI * cosI);
-			if(sinT2 <= 1.f){
-				float cosT = std::sqrt(1.f - sinT2);
-				Vec3f refract_dir = (n * ray_dir) + (n * cosI - cosT) * normal;
-				refract_dir = refract_dir.normalize();
+			Vec3f ray_dir = (hit.point - ray.origin).normalize();
+			Vec3f normal = hit.normal;
+			float n1 = 1.f;
+			float n2 = material->refractionIndex;
+			if(ray.isInside){
+				std::swap(n1,n2);
+			}
+			float cosi = -normal.dotProduct(ray_dir);
+			float n = n1 / n2;
+			float k = 1.f - n * n * (1.f - cosi * cosi);
+			if(k >= 0.f){
+				Vec3f refract_dir = (n * -ray_dir + (n * cosi - std::sqrt(k)) * normal).normalize();
 				Ray refract_ray;
 				refract_ray.direction = refract_dir;
 				refract_ray.inv_dir = 1.f / refract_dir;
 				refract_ray.origin = hit.point;
 				refract_ray.raytype = SECONDARY;
+				refract_ray.isInside = !ray.isInside;
 				refraction = refraction + castRay(refract_ray, scene, depth + 1, nbounces);
+			}else{
+				Vec3f reflect_dir = (2.f * normal.dotProduct(ray_dir) * normal - ray_dir).normalize();
+				Ray reflect_ray;
+				reflect_ray.direction = reflect_dir;
+				reflect_ray.inv_dir = 1.f/reflect_dir;
+				reflect_ray.origin = hit.point;
+				reflect_ray.raytype = SECONDARY;
+				reflect_ray.isInside = ray.isInside;
+				refraction = refraction + ka * castRay(reflect_ray, scene, depth+1, nbounces);
 			}
 		}
-
-		
 	}
 
-	color = (Ia + Id + Is + reflection) * ka + refraction * kt;
+	color = (Ia + Id + Is + reflection) * ka + kt * refraction;
 	return color;
 }
 
