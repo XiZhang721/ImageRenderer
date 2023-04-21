@@ -22,9 +22,7 @@ public:
 	// Constructors
 	//
 	Camera(){};
-	Camera(int height, int width, int fov, Vec3f position, Vec3f lookat, Vec3f up, int camera_type, int jittering):height(height), width(width), fov(fov), position(position), lookat(lookat), up(up), camera_type(camera_type), jittering(jittering){
-		//setCameraToWorld();
-	};
+	Camera(int height, int width, int fov, Vec3f position, Vec3f lookat, Vec3f up, int camera_type, int jittering):height(height), width(width), fov(fov), position(position), lookat(lookat), up(up), camera_type(camera_type), jittering(jittering){};
 
 	//
 	// Destructor
@@ -46,15 +44,9 @@ public:
 	virtual void printCamera()=0;
 
 
-
 	//
 	// other camera functions (to complete)
 	//
-
-	// Matrix44f getCameraToWorld() const {return cameraToWorld;};
-
-	// void setCameraToWorld();
-
 
 
 	//
@@ -98,7 +90,6 @@ protected:
 	Vec3f position;
 	Vec3f lookat;
 	Vec3f up;
-	//Matrix44f cameraToWorld;
 	int camera_type;
 
 };

@@ -19,7 +19,9 @@ namespace rt{
  * Performs ray tracing to render a photorealistic scene
  *
  * @param camera the camera viewing the scene
+ * 
  * @param scene the scene to render, including objects and lightsources
+ * 
  * @param nbounces the number of bounces to consider for raytracing
  *
  * @return a pixel buffer containing pixel values in linear RGB format
@@ -38,7 +40,7 @@ Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 		jitterXNum = (int)std::sqrt(jitterNumber);
 		jitterYNum = (int)(jitterNumber / jitterXNum);
 	}
-	std::printf("total jittering num: %d \njitter x num: %d\njitter y num: %d\n",jitterNumber, jitterXNum, jitterYNum);
+	std::printf("Total jittering num: %d \nJitter x num: %d\nJitter y num: %d\n",jitterNumber, jitterXNum, jitterYNum);
 	// Start rendering
 	if(camera->getType() == 0){
 		//----------phinhole camera------
@@ -120,10 +122,25 @@ Vec3f* RayTracer::render(Camera* camera, Scene* scene, int nbounces){
 
 }
 
+/**
+ * The cast ray function
+ * 
+ * @param ray the ray to cast
+ * 
+ * @param scene the scene
+ * 
+ * @param depth the current depth of the ray
+ * 
+ * @param nbounces the total nbounces that the ray can have
+ * 
+ * @return the color of ray casting result
+*/
 Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 	if(depth > nbounces){
 		return scene->backgroundColor;
 	}
+
+	// Return background color if ray not hit
 	Hit hit = scene->intersect(ray);
 	if(!hit.hasHit){
 		return scene->backgroundColor;
@@ -139,6 +156,8 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 	float kt = 1.f - ka;
 	Vec3f color{};
 	Vec3f reflection = scene->backgroundColor;
+
+	// Ray casting for each light source
 	for(LightSource *light : scene->getLightSources()){
 		Vec3f light_dir = (hit.point - light->position).normalize();
 		float distance = (hit.point - light->position).length();
@@ -151,6 +170,8 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 		shadowRay.inv_dir = 1.f / light_dir;
 		shadowRay.raytype = SHADOW;
 
+
+		// Check if ray's hit point can be seen by light
 		Hit shadowHit = scene->intersect(shadowRay);
 		if(shadowHit.hasHit && !checkTwoPoints(shadowHit.point, hit.point)){
 			continue;
@@ -197,7 +218,7 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 			}
 		}
 
-		// refraction
+		// Refraction
 		if(kt > 0.f && nbounces > 0){
 			Vec3f ray_dir = (hit.point - ray.origin).normalize();
 			Vec3f normal = hit.normal;
@@ -210,6 +231,7 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 			float n = n1 / n2;
 			float k = 1.f - n * n * (1.f - cosi * cosi);
 			if(k >= 0.f){
+				// The refraction
 				Vec3f refract_dir = (n * -ray_dir + (n * cosi - std::sqrt(k)) * normal).normalize();
 				Ray refract_ray;
 				refract_ray.direction = refract_dir;
@@ -219,6 +241,7 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 				refract_ray.isInside = !ray.isInside;
 				refraction = refraction + castRay(refract_ray, scene, depth + 1, nbounces);
 			}else{
+				// The internal reflection
 				Vec3f reflect_dir = (2.f * normal.dotProduct(ray_dir) * normal - ray_dir).normalize();
 				Ray reflect_ray;
 				reflect_ray.direction = reflect_dir;
@@ -231,7 +254,7 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 		}
 	}
 	
-
+	// Compute the final color and return
 	color = (Ia + Id + Is + reflection) * ka + kt * refraction;
 	return color;
 }

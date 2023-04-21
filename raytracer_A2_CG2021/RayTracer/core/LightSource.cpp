@@ -14,6 +14,8 @@ namespace rt{
 
         std::string lightType=lightSpecs["type"].GetString();
 
+
+        // We have only implemented the pointlight
         if(lightType.compare("pointlight") == 0){
             Vec3f pos{lightSpecs["position"][0].GetFloat(),lightSpecs["position"][1].GetFloat(),lightSpecs["position"][2].GetFloat()};
             Vec3f is{lightSpecs["is"][0].GetFloat(),lightSpecs["is"][1].GetFloat(),lightSpecs["is"][2].GetFloat()};

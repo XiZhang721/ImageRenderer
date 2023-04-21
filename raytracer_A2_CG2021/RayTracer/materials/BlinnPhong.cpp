@@ -24,6 +24,7 @@ namespace rt{
         this->tWidth = tWidth;
         this->tHeight = tHeight;
 
+        // Load the texture if the material has it
         if(tPath.length()>0){
             int x,y,channels;
             const char* path = tPath.c_str();

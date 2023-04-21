@@ -16,6 +16,14 @@
 namespace rt{
     Shape::~Shape(){};
 
+	/**
+ 	* Factory function that returns shape subclass based on shape specifications
+ 	*
+ 	* @param shapeSpecs shape specifications json object
+ 	*
+ 	* @return shape subclass instance
+ 	*
+ 	*/
     Shape* Shape::createShape(Value& shapeSpecs){
         if(!shapeSpecs.HasMember("type")){
             std::cerr<<"Shape type not specified"<<std::endl;

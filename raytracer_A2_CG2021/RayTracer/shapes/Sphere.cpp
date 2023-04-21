@@ -20,7 +20,6 @@ namespace rt{
 	Hit Sphere::intersect(Ray ray){
 
 		Hit h;
-		//-----------to be implemented -------------
 		
 		Vec3f L = center - ray.origin;
 		float tca = L.dotProduct(ray.direction);

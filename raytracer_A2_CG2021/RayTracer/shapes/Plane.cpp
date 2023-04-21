@@ -20,8 +20,6 @@ namespace rt{
 	Hit Plane::intersect(Ray ray){
 
 		Hit h;
-		//-----------to be implemented -------------
-		// Not inplemented
 		Vec3f e1 = v1 - v0;
 		Vec3f e2 = v3 - v0;
 		Vec3f normal = e2.crossProduct(e1).normalize();

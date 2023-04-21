@@ -6,6 +6,14 @@
 #include "materials/BlinnPhong.h"
 namespace rt{
 
+	/**
+ 	* Factory function that returns material subclass based on material specifications
+ 	*
+ 	* @param materialSpecs material specifications json object
+ 	*
+ 	* @return material subclass instance
+ 	*
+ 	*/
     Material* Material::createMaterial(Value& materialSpecs){
         float ks = materialSpecs["ks"].GetFloat();
         float kd = materialSpecs["kd"].GetFloat();

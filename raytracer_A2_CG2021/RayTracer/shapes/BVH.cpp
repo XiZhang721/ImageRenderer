@@ -11,6 +11,13 @@
 
 namespace rt{
 
+    /**
+     * The function for building BVH tree
+     * 
+     * @param shapes the shapes of the current node
+     * 
+     * @return the bvh node
+    */
     BVHNode* BVH::BuildBVHTree(std::vector<Shape *> shapes)
     {
         BVHNode* node = new BVHNode;
@@ -35,7 +42,7 @@ namespace rt{
         // Split the shapes into two parts
         std::vector<Shape *> left;
         std::vector<Shape *> right;
-        // Skip the complex spliting if only two shapes
+        // Skip the complex spliting process if only two shapes
         if(shapes.size() == 2){
             left.push_back(shapes.at(0));
             right.push_back(shapes.at(1));
@@ -117,11 +124,14 @@ namespace rt{
             }
         }
         
+        // Create the left node and right node
         BVHNode* leftNode = BVH::BuildBVHTree(left);
         BVHNode* rightNode = BVH::BuildBVHTree(right);
         node->left = leftNode;
         node->right = rightNode;
         // std::printf("BVH tree finished building.\n");
+
+        // Construct the current node based on the left node and right node
         if(leftNode->isEmpty == true && rightNode->isEmpty == true){
             return node;
         }
@@ -149,7 +159,17 @@ namespace rt{
         }
         
     }
+    
 
+    /**
+     * Function that get the intersection hit of the ray
+     * 
+     * @param ray the ray
+     * 
+     * @param node the bvh node
+     * 
+     * @return if the ray intersects the node
+    */
     Hit BVH::getIntersect(Ray ray, BVHNode* node)
     {
         BVHNode* current = node;
@@ -226,7 +246,7 @@ namespace rt{
             float dis_left = (left.point - ray.origin).length();
             float dis_right = (right.point - ray.origin).length();
 
-            // prevent reflection ray hitting the origin object
+            // Prevent reflection ray hitting the origin object
             if(dis_left <= 1e-3 && dis_right <=1e-3){
                 return hit;
             }else if(dis_left <= 1e-3){
@@ -235,7 +255,7 @@ namespace rt{
                 return left;
             } 
 
-            // return the closer hit point
+            // Return the closer hit point
             if(dis_left < dis_right){
                 return left;
             }else{
@@ -245,6 +265,15 @@ namespace rt{
 
     }
 
+    /**
+     * The function that checks if a ray hits a bounding box
+     * 
+     * @param ray the ray
+     * 
+     * @param box the bounding box
+     * 
+     * @return if the ray hits the bounding box
+    */
     bool BVH::checkBounding(Ray ray, BoundingBox box)
     {   
         Vec3f t_min = (box.min - ray.origin) * ray.inv_dir;

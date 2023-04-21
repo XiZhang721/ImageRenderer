@@ -17,6 +17,11 @@ namespace rt{
         this->createMesh(path);
     }
 
+    /**
+     * The function for creating the triangle mesh
+     * 
+     * @param path the path to the Ply model file
+    */
     void TriMesh::createMesh(std::string path)
     {   
         try{
@@ -45,6 +50,7 @@ namespace rt{
             }
             
             for(const auto face : faces){
+                // Get the vertices
                 Vec3f v0 = Vec3f((float)vertices[face[0]][0], (float)vertices[face[0]][1], (float)vertices[face[0]][2]) * this->scale;
                 Vec3f v1 = Vec3f((float)vertices[face[1]][0], (float)vertices[face[1]][1], (float)vertices[face[1]][2]) * this->scale;
                 Vec3f v2 = Vec3f((float)vertices[face[2]][0], (float)vertices[face[2]][1], (float)vertices[face[2]][2]) * this->scale;
@@ -53,6 +59,7 @@ namespace rt{
                 v1 = v1 + this->position;
                 v2 = v2 + this->position;
 
+                // Get the normal
                 Vec3f n0, n1, n2;
                 if(hasNormal){
                     n0 = Vec3f((float)nx[face[0]],(float)ny[face[0]],(float)nz[face[0]]).normalize();
@@ -60,6 +67,7 @@ namespace rt{
                     n2 = Vec3f((float)nx[face[2]],(float)ny[face[2]],(float)nz[face[2]]).normalize();
                 }
 
+                // Get the uv
                 Vec2f uv0, uv1, uv2;
                 if(hasTexture){
                     uv0 = Vec2f((float) s[face[0]], (float) t[face[0]]);
@@ -67,6 +75,8 @@ namespace rt{
                     uv2 = Vec2f((float) s[face[2]], (float) t[face[2]]);
                 }
 
+
+                // Add the forth triangle if the faces has four vertices
                 if(face.size() == 4){
                     Vec3f v3 = Vec3f((float)vertices[face[3]][0], (float)vertices[face[3]][1], (float)vertices[face[3]][2]) * this->scale;
                     v3 = v3 + this->position;
@@ -78,6 +88,8 @@ namespace rt{
                     if(hasTexture){
                         uv3 = Vec2f((float) s[face[3]], (float) t[face[3]]);
                     }
+
+                    // Create the triangle and add to triangles
                     if(hasNormal && hasTexture){
                         this->triangles.push_back(new Triangle(v0, v2, v3, n0, n2, n3, uv0, uv2, uv3, material));
                     }else if(hasNormal){
@@ -89,6 +101,7 @@ namespace rt{
                     }
                 }
 
+                // Create the triangle and add to triangles
                 if(hasNormal && hasTexture){
                     this->triangles.push_back(new Triangle(v0, v1, v2, n0, n1, n2, uv0, uv1, uv2, material));
                 }else if(hasNormal){
@@ -106,15 +119,24 @@ namespace rt{
             std::cerr << "Ply file loading failed. \n" << std::endl;
         }
         std::printf("ply loading succeed %d triangles.\n",(int)this->triangles.size());
+        // Create the bvh, and the bounding of TriMesh is the bounding of its bvh root
         this->bvh = new BVH(this->triangles);
         this->max = this->bvh->root->box.max;
         this->min = this->bvh->root->box.min;
         this->center = (this->max + this->min) / 2.f;
     }
 
+    /**
+	 * Computes whether a ray hit the specific instance of a triangle mesh shape and returns the hit data
+	 *
+	 * @param ray cast ray to check for intersection with shape
+	 *
+	 * @return hit struct containing intersection information
+	 *
+	 */
     Hit TriMesh::intersect(Ray ray)
     {
-
+        // The below is the standard intersection checking method for TriMesh
         // Hit hit;
 	    // hit.hasHit = false;
 	    // double rayDistance = INFINITY;
@@ -137,6 +159,8 @@ namespace rt{
 		//     }
 	    // }
 	    // return hit;
+
+        // The below is the intersection using BVH for TriMesh
         Hit hit = this->bvh->intersect(ray);
         return hit;
     }

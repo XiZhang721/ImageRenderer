@@ -12,8 +12,6 @@ namespace rt{
 
 	Camera::~Camera(){};
 
-
-
 	/**
  	* Factory function that returns camera subclass based on camera specifications
  	*

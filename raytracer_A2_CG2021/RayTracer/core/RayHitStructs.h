@@ -19,16 +19,14 @@ struct Ray{
 public:
 	Vec3f origin;
 	Vec3f direction;
-	Vec3f inv_dir;
+	Vec3f inv_dir; // the inversed direction
 	RayType raytype;
 	bool isInside = false;
-	//----------Ray variables to be filled------
 };
 
 
 struct Hit{
 	Vec3f point; //point where ray hits a shape
-	//----------Hit variables to be filled------
 	bool hasHit; // if the ray hits an object
 	Vec3f normal;
 	Material *material;

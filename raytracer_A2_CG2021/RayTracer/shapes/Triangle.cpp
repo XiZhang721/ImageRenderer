@@ -8,7 +8,14 @@
 
 
 namespace rt{
-
+	/**
+	 * Computes whether a ray hit the specific instance of a triangle shape and returns the hit data
+	 *
+	 * @param ray cast ray to check for intersection with shape
+	 *
+	 * @return hit struct containing intersection information
+	 *
+	 */
     Hit Triangle::intersect(Ray ray){
         Hit hit;
         Vec3f e1 = v1 - v0;
