@@ -15,24 +15,27 @@
     "lightsources": [
     {
         "type": "pointlight",
-        "position": [0.0, 1.0, 2.2],
+        "position": [0.0, 1.0, 1.5],
         "is": [100.0, 100.0, 100.0],
         "id": [100.0, 100.0, 100.0]
     }
     ],
     "shapes":[
     {
-        "type":"sphere",
-        "center": [0.0, 2.7, 0.55],
-        "radius":0.4,
-        "material":{
-            "ks":0.4,
-            "kd":0.8,
-            "ka":0.2,
-            "refractionindex": 1.54,
-            "specularexponent":3,
-            "diffusecolor":[0.3, 0.3, 0.3]
-        }
+            "id": "triangle mesh",
+            "type": "mesh",
+            "position": [0.0, 2.7, 0.75],
+            "path": "../models/chair.ply",
+            "scale": 0.4,
+            "material":{
+                "ks":0.4,
+                "kd":0.8,
+                "specularexponent":3,
+                "diffusecolor":[0.4, 0.3, 0.4],
+                "tPath": "../textures/Wood.jpg",
+                "tWidth": 2048,
+                "tHeight": 2048
+            }
     },
     {
         "id": "back wall",

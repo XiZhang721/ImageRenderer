@@ -230,6 +230,7 @@ Vec3f RayTracer::castRay(Ray ray, Scene* scene, int depth,int nbounces){
 			}
 		}
 	}
+	
 
 	color = (Ia + Id + Is + reflection) * ka + kt * refraction;
 	return color;
