@@ -18,26 +18,39 @@ namespace rt{
 	 *
 	 */
 	Hit Sphere::intersect(Ray ray){
-
-		Hit h;
-		
+		Hit h;		
 		Vec3f L = center - ray.origin;
-		float tca = L.dotProduct(ray.direction);
+		Vec3f D = ray.direction;
+		float tca = L.dotProduct(D);
 		if(tca < 0){
 			h.hasHit = false;
 			return h;
 		}
 		float d2 = L.dotProduct(L) - tca * tca;
-		if(d2 > radius * radius){
+		float d = sqrtf(d);
+		if(d < 0.f){
 			h.hasHit = false;
 			return h;
 		}
-		float thc = sqrtf(radius * radius - d2);
+
+		float thc2 = radius * radius - d2;
+		// We need to ensure thc2 is not negative so we could apply sqrt to it
+		if(thc2 < 0){
+			h.hasHit = false;
+			return h;
+		}
+
+		// Use the pythaorean theorem to calculate t0 and t1
+		float thc = sqrtf(thc);
 		float t0 = tca - thc;
 		float t1 = tca + thc;
+
+		// Get the closer t value as t0
 		if(t0 > t1){
 			std::swap(t0,t1);
 		}
+
+		// Check if the ray hits
 		if(t0 < 1e-4){
 			t0 = t1;
 			if(t0 < 1e-4){
