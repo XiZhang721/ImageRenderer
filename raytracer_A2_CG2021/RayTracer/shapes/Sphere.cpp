@@ -20,46 +20,39 @@ namespace rt{
 	Hit Sphere::intersect(Ray ray){
 		Hit h;		
 		Vec3f L = center - ray.origin;
-		Vec3f D = ray.direction;
-		float tca = L.dotProduct(D);
+		float tca = L.dotProduct(ray.direction);
 		if(tca < 0){
 			h.hasHit = false;
 			return h;
 		}
-		float d2 = L.dotProduct(L) - tca * tca;
-		float d = sqrtf(d);
-		if(d < 0.f){
-			h.hasHit = false;
-			return h;
-		}
 
-		float thc2 = radius * radius - d2;
-		// We need to ensure thc2 is not negative so we could apply sqrt to it
-		if(thc2 < 0){
+		float d2 = L.dotProduct(L) - tca * tca;
+		float d = sqrtf(d2);
+		if(d < 0.f || d > radius){
 			h.hasHit = false;
 			return h;
 		}
 
 		// Use the pythaorean theorem to calculate t0 and t1
-		float thc = sqrtf(thc);
+		float thc = sqrtf(radius * radius - d2);
 		float t0 = tca - thc;
 		float t1 = tca + thc;
 
-		// Get the closer t value as t0
-		if(t0 > t1){
-			std::swap(t0,t1);
+		// Get the t value
+		float t;
+		if(t0 < 1e-4 && t1 < 1e-4){
+			h.hasHit = false;
+			return h;
+		}else if(t0 < 1e-4){
+			t = t1;
+		}else if(t1 < 1e-4){
+			t = t0;
+		}else{
+			t = std::min(t0, t1);
 		}
 
-		// Check if the ray hits
-		if(t0 < 1e-4){
-			t0 = t1;
-			if(t0 < 1e-4){
-				h.hasHit = false;
-				return h;
-			}
-		}
 		h.hasHit = true;
-		h.point = ray.origin + ray.direction * t0;
+		h.point = ray.origin + ray.direction * t;
 		h.normal = (h.point - center).normalize();
 		h.material = material;
 		float phi = acos(h.normal[2]);
