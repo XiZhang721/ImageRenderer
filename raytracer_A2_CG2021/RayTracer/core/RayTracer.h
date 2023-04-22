@@ -29,9 +29,9 @@ public:
 private:
 	// Check if two points are the same
 	static bool checkTwoPoints(Vec3f p1, Vec3f p2){
-		bool isXSame = abs(p1.x - p2.x) <= 1e-3f;
-		bool isYSame = abs(p1.y - p2.y) <= 1e-3f;
-		bool isZSame = abs(p1.z - p2.z) <= 1e-3f;
+		bool isXSame = abs(p1.x - p2.x) <= 1e-3;
+		bool isYSame = abs(p1.y - p2.y) <= 1e-3;
+		bool isZSame = abs(p1.z - p2.z) <= 1e-3;
 		return isXSame && isYSame && isZSame;
 	}
 };
